@@ -6,6 +6,7 @@ import options, { defaults, afterUpdateOptions } from './scriptOptions'
 
 const { archetypes } = platforms.currentPlatform
 
+// set some reasonable default options here
 defaults({
   holder: {
     selector: ".bettersharing-inline-email-form",
@@ -16,11 +17,12 @@ defaults({
       "margin-bottom": "15px",
     }
   },
-  cloudspongeOptions: {
+  cloudsponge: {
     sources: ['gmail', 'yahoo', 'windowslive', 'aol', 'icloud', 'office365', 'outlook', 'addressbook', 'csv'],
   },
 })
 
+// applies/inherits the classnames and styles from an archetype 
 function applyProps(element, parentProps) {
   // don't re-init or continue if no element was found
   if (!element) {
@@ -123,7 +125,7 @@ const initAddressBookConnector = (opts) => {
       document.getElementById('status-message').innerHTML('<div class="alert alert-warning alert-dismissible fade show" role="alert">We failed to send any email: '+data.responseText+'.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
     },
     cloudspongeOptions: {
-      ...opts.cloudspongeOptions,
+      ...opts.cloudsponge,
     },
   })
 }
