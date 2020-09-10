@@ -18,4 +18,12 @@ Add the script to your page:
 
 ## Configure CloudSponge & Zapier
 
-See the [better-sharing.js project](https://www.npmjs.com/package/@cloudsponge/better-sharing.js) for information on how to set up email sending via the Contact Picker Zapier app.
+### OAuth & Your Proxy URL
+
+You'll be asked for your Proxy URL as you go about setting up OAuth for Google, Yahoo and Microsoft address books. Don't been intimidated! You've made a good choice by using the BetterSharing plugin on KickoffLabs. The Thank-you page you added your script to *is* your Proxy URL. Use the URL as it shows up in your Basic Settings, without any query parameters.
+
+For example, if your thank you page is hosted here: `https://thanks-referrals.kickoffpages.com/?preview=true&contest_score=2`, use everything up to the `?`: `https://thanks-referrals.kickoffpages.com/` as your Proxy URL. 
+
+This is the same URL that you'll use when you are asked for your Authorized Redirect URI by Google, Yahoo or Microsoft.
+
+See the [better-sharing.js project](https://www.npmjs.com/package/@cloudsponge/better-sharing.js) for much more information on how to set up email sending via the Contact Picker Zapier app.
