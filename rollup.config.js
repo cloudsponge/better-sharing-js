@@ -51,7 +51,7 @@ const targetBuild = (target, opts={prod: false}) => {
   const newOptions = {...base}
   newOptions.output = {
     ...base.output,
-    name: `${targetName}.js`,
+    name: "betterSharing",
     file: `packages/${target}/${targetName}.js`,
   }
   newOptions.plugins = [

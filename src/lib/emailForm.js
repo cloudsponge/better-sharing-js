@@ -16,6 +16,9 @@ defaults({
       "margin-bottom": "15px",
     }
   },
+  cloudspongeOptions: {
+    sources: ['gmail', 'yahoo', 'windowslive', 'aol', 'icloud', 'office365', 'outlook', 'addressbook', 'csv'],
+  },
 })
 
 function applyProps(element, parentProps) {
@@ -40,8 +43,7 @@ function emailFormHtml() {
           // '<small class="form-text text-muted" id="emailHelp">Separate multiple emails with commas.</small>'+
           '<div class="input-group-btn" style="vertical-align: top">'+
             '<button class="cloudsponge-launch '+archetypes.buttonArchetype.classes+'" type="button" style="'+archetypes.buttonArchetype.styles+'">'+
-              '<i class="fa fa-address-card"></i>'+
-              ' Add From Contacts'+
+              '<i class="fa fa-address-card"></i> Add From Contacts'+
             '</button>'+
           '</div>'+
         '</div>'+
@@ -54,8 +56,7 @@ function emailFormHtml() {
           '<div class="input-group-btn" style="vertical-align: bottom">'+
             '<button class="'+archetypes.buttonArchetype.classes+'" id="send-invites" name="button" type="submit" style="'+archetypes.buttonArchetype.styles+'">'+
             // '<button class="btn btn-primary has-set-radius" style="margin-left: 5px; vertical-align: bottom; width: 200px">'+
-              '<i class="fa fa-paper-plane"></i>'+
-              ' Send The Invite'+
+              '<i class="fa fa-paper-plane"></i> Send The Invite'+
             '</button>'+
           '</div>'+
 
@@ -120,7 +121,10 @@ const initAddressBookConnector = (opts) => {
     failure: function(data) {
       console.log('success NOT!', data);
       document.getElementById('status-message').innerHTML('<div class="alert alert-warning alert-dismissible fade show" role="alert">We failed to send any email: '+data.responseText+'.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
-    }
+    },
+    cloudspongeOptions: {
+      ...opts.cloudspongeOptions,
+    },
   })
 }
 
@@ -130,5 +134,5 @@ const run = () => {
   addLoadHandler(addEmailFormToPage)
 }
 
-const emailForm = { run }
+const emailForm = { run, options }
 export default emailForm
