@@ -65,6 +65,6 @@ const targetBuild = (target, opts={prod: false}) => {
 }
 
 export default [
-  targetBuild('kickoff-labs', {prod: true}),
   targetBuild('kickoff-labs'),
+  targetBuild('kickoff-labs', {prod: true}),
 ];

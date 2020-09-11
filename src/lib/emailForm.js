@@ -9,7 +9,7 @@ const { archetypes } = platforms.currentPlatform
 // set some reasonable default options here
 defaults({
   holder: {
-    selector: ".bettersharing-inline-email-form",
+    selector: ".better-sharing-inline-email-form",
     element: null,
     classes: '',
     styles: {
@@ -33,38 +33,79 @@ function applyProps(element, parentProps) {
   element.setAttribute('style', objToCss(parentProps.styles) + (element.getAttribute('style') || ''));
 }
 
+function css() {
+  return `<style>
+    ${options().holder.selector} .better-sharing-email-form .better-sharing-contact-button,
+    ${options().holder.selector} .better-sharing-email-form .better-sharing-send-button {
+      ${archetypes.buttonArchetype.styles}
+    }
+    ${options().holder.selector} .better-sharing-email-form better-sharing-input-group-contact-button {
+      /* vertical-align: top; */
+    }
+    ${options().holder.selector} .better-sharing-email-form .better-sharing-contact-button {
+      /*width: calc(var(--width) - var(--margin-left));*/
+    }
+    ${options().holder.selector} .better-sharing-email-form better-sharing-input-group-send-button {
+      /* text-align: left; */
+      /* vertical-align: bottom; */
+    }
+    ${options().holder.selector} .better-sharing-email-form .better-sharing-send-button {
+      margin-left: 0;
+    }
+    ${options().holder.selector} .better-sharing-email-form .better-sharing-input {
+      ${archetypes.inputArchetype.styles}
+    }
+    ${options().holder.selector} .better-sharing-email-form textarea.better-sharing-input {
+      height: calc(var(--height) * 2);
+    }
+    ${options().holder.selector} .better-sharing-email-form .better-sharing-icon {
+      ${objToCss(archetypes.iconArchetype.styles)}
+    }
+    ${options().holder.selector} .better-sharing-email-form .input-group {
+      margin-top: 5px;
+      width: 100%;
+    }
+  </style>`
+}
+
 function emailFormHtml() {
-  return '<div id="status-message"></div>' +
+  return css() +
+  '<div class="better-sharing-email-form">'+
+    '<div id="status-message"></div>' +
     '<form action="#" accept-charset="UTF-8" method="post" data-addressBookConnector-js="true">'+
+
       '<input type="hidden" name="owner" id="owner" value=""/>'+
-      '<input type="hidden" name="subject" id="subject" value="'+options().mailtoParams.subject+'"/>'+
+      '<input type="hidden" name="subject" value="'+options().mailtoParams.subject+'"/>'+
 
-      '<div class="'+archetypes.divLayoutArchetype.classes+'" style="'+archetypes.divLayoutArchetype.styles+'">'+
-        '<div class="'+archetypes.formGroupArchetype.classes+'">'+
-          '<input type="text" name="email" id="email" value="" class="'+archetypes.inputArchetype.classes+' cloudsponge-contacts" placeholder="To: (enter contact&rsquo;s email)" required="required" aria-describedby="#emailHelp"/>'+
+      '<div class="col-md-12">'+
+        '<div class="input-group">'+
+          '<input type="text" name="email" class="form-control cloudsponge-contacts better-sharing-input" placeholder="To: (enter contact&rsquo;s email)" required="required" aria-describedby="#emailHelp" />'+
           // '<small class="form-text text-muted" id="emailHelp">Separate multiple emails with commas.</small>'+
-          '<div class="input-group-btn" style="vertical-align: top">'+
-            '<button class="cloudsponge-launch '+archetypes.buttonArchetype.classes+'" type="button" style="'+archetypes.buttonArchetype.styles+'">'+
-              '<i class="fa fa-address-card"></i> Add From Contacts'+
+          '<div class="input-group-btn better-sharing-input-group-contact-button">'+
+            '<button class="cloudsponge-launch btn better-sharing-contact-button">'+
+              '<i class="fa fa-address-card better-sharing-icon"></i> Add From Contacts'+
             '</button>'+
           '</div>'+
         '</div>'+
       '</div>'+
 
-      '<div class="'+archetypes.divLayoutArchetype.classes+'" style="'+archetypes.divLayoutArchetype.styles+'">'+
-        '<div class="'+archetypes.formGroupArchetype.classes+'">'+
-          '<textarea name="body" id="body" class="'+archetypes.inputArchetype.classes+'" rows="5">'+options().mailtoParams.body+'</textarea>'+
-
-          '<div class="input-group-btn" style="vertical-align: bottom">'+
-            '<button class="'+archetypes.buttonArchetype.classes+'" id="send-invites" name="button" type="submit" style="'+archetypes.buttonArchetype.styles+'">'+
-            // '<button class="btn btn-primary has-set-radius" style="margin-left: 5px; vertical-align: bottom; width: 200px">'+
-              '<i class="fa fa-paper-plane"></i> Send The Invite'+
-            '</button>'+
-          '</div>'+
-
+      '<div class="col-md-12">'+
+        '<div class="input-group">'+
+          '<textarea name="body" class="better-sharing-input form-control" rows="5">'+options().mailtoParams.body+'</textarea>'+
         '</div>'+
       '</div>'+
-    '</form>'
+      '<div class="col-md-12">'+
+        '<div class="input-group">'+
+          '<div class="input-group-btn better-sharing-input-group-send-button">'+
+            '<button class="btn better-sharing-send-button" id="better-sharing-send-invites" name="button" type="submit">'+
+              '<i class="fa fa-paper-plane better-sharing-icon"></i> Send The Invite'+
+            '</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+
+    '</form>'+
+  '</div>'
 }
 
 // guess the button and other styles from elements that may exist on the page
@@ -78,6 +119,8 @@ function guessOptionsFromPage() {
 
   options().holder.element = document.querySelector(options().holder.selector) || document.createElement('div');
   applyProps(options().holder.element, options().holder)
+  options().holder.element.classList.add('row')
+  options().holder.element.classList.add(options().holder.selector.replace(/^\./, ''))
 
   // parse out the mailto params for subject/body/to/from/cc/bcc, etc
   var mailtoParamsArray = archetypes.mailtoArchetype.element.href.split(/[?&=]/).slice(1)
