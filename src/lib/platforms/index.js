@@ -1,26 +1,19 @@
-import { objToCss } from '../window'
-
-import currentPlatform from './process.env.TARGET_PLATFORM'
+import currentPlatform, { css, html } from './process.env.TARGET_PLATFORM'
+import options from '../scriptOptions'
 
 const platforms = {
   currentPlatform,
 }
 
-export const initArchetype = (props) => {
+const { archetypes } = platforms.currentPlatform
+
+const initArchetype = (props) => {
   props.element = props.element || document.querySelector(props.selector);
 
   // don't re-init or continue if no element was found
   if (!props.element || props._initialized) {
     return
   }
-
-  // copy the classnames, excluding the current selector's
-  // if (props.selector.startsWith('.')) {
-  //   var excludedClassName = props.selector.replace(/^\./, '');
-  //   props.classes = props.element.className.split(excludedClassName).join('').trim();
-  // } else {
-  //   props.classes = props.element.className;
-  // }
 
   // applies the relevant styles inline:
   const computedStyles = window.getComputedStyle(props.element)
@@ -38,10 +31,31 @@ export const initArchetype = (props) => {
     --height: ${computedStyles.height};
   `
 
-  props.styles = objToCss(props.styles) + newStyles;
+  props.styles = newStyles;
 
   // finished init!
   props._initialized = true;
+}
+
+
+// guess the button and other styles from elements that may exist on the page
+const guessOptionsFromPage = () => {
+  // look for a copy-paste link to grab the colors off of:
+  initArchetype(archetypes.buttonArchetype)
+  initArchetype(archetypes.mailtoArchetype)
+  initArchetype(archetypes.inputArchetype)
+
+  // parse out the mailto params for subject/body/to/from/cc/bcc, etc
+  var mailtoParamsArray = archetypes.mailtoArchetype.element.href.split(/[?&=]/).slice(1)
+  options().mailtoParams = {}
+  for (var i = 0; i < mailtoParamsArray.length; i += 2) {
+    options().mailtoParams[mailtoParamsArray[i]] = decodeURIComponent(mailtoParamsArray[i+1])
+  }
+}
+
+export {
+  html,
+  guessOptionsFromPage,
 }
 
 export default platforms

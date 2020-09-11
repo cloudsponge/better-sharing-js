@@ -25,16 +25,3 @@ export const addLoadHandler = (handler) => {
     document.attachEvent('onload', handler)
   }
 }
-
-// converts a JSON object (or string) to a string of CSS
-export const objToCss = (obj) => {
-  var cssString = JSON.stringify(obj)
-            .replace(/"/g,'')
-            .replace(/,/g,';')
-            .replace(/^\{/,'')
-            .replace(/\}$/,'');
-  if (cssString.length > 0) {
-    cssString = cssString + ';';
-  }
-  return cssString;
-}
