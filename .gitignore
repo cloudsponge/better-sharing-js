@@ -5,4 +5,5 @@ yarn-error.log
 coverage/
 node_modules/
 
+# ignore built packages
 packages/**/better-sharing-*.js
