@@ -1,5 +1,3 @@
-import options from '../scriptOptions'
-
 // describes the default values for our platforms
 
 // the idea here is to inherit certain styles from elements that are present on the page already.
@@ -8,39 +6,39 @@ import options from '../scriptOptions'
 // input: font-size, colors, padding, margins
 
 export const css = () => {
-  const { archetypes } = kickoffLabs
+  const { holder, archetypes } = kickoffLabs
   return `<style>
-    ${options().holder.selector} {
+    ${holder.selector} {
       margin-top: 15px;
       margin-bottom: 15px;
     }
-    ${options().holder.selector} .better-sharing-email-form .better-sharing-contact-button,
-    ${options().holder.selector} .better-sharing-email-form .better-sharing-send-button {
+    ${holder.selector} .better-sharing-email-form .better-sharing-contact-button,
+    ${holder.selector} .better-sharing-email-form .better-sharing-send-button {
       ${archetypes.buttonArchetype.styles}
     }
-    ${options().holder.selector} .better-sharing-email-form better-sharing-input-group-contact-button {
+    ${holder.selector} .better-sharing-email-form better-sharing-input-group-contact-button {
       /* vertical-align: top; */
     }
-    ${options().holder.selector} .better-sharing-email-form .better-sharing-contact-button {
+    ${holder.selector} .better-sharing-email-form .better-sharing-contact-button {
       /*width: calc(var(--width) - var(--margin-left));*/
     }
-    ${options().holder.selector} .better-sharing-email-form better-sharing-input-group-send-button {
+    ${holder.selector} .better-sharing-email-form better-sharing-input-group-send-button {
       /* text-align: left; */
       /* vertical-align: bottom; */
     }
-    ${options().holder.selector} .better-sharing-email-form .better-sharing-send-button {
+    ${holder.selector} .better-sharing-email-form .better-sharing-send-button {
       margin-left: 0;
     }
-    ${options().holder.selector} .better-sharing-email-form .better-sharing-input {
+    ${holder.selector} .better-sharing-email-form .better-sharing-input {
       ${archetypes.inputArchetype.styles}
     }
-    ${options().holder.selector} .better-sharing-email-form textarea.better-sharing-input {
+    ${holder.selector} .better-sharing-email-form textarea.better-sharing-input {
       height: calc(var(--height) * 2);
     }
-    ${options().holder.selector} .better-sharing-email-form .better-sharing-icon {
+    ${holder.selector} .better-sharing-email-form .better-sharing-icon {
       ${archetypes.iconArchetype.styles}
     }
-    ${options().holder.selector} .better-sharing-email-form .input-group {
+    ${holder.selector} .better-sharing-email-form .input-group {
       margin-top: 5px;
       width: 100%;
     }
@@ -88,6 +86,11 @@ export const html = (mailtoParams={}) => {
 }
 
 const kickoffLabs = {
+  holder: {
+    selector: ".better-sharing-inline-email-form",
+    classes: ["row", "better-sharing-inline-email-form"],
+    ancestorSelector: '.row',
+  },
   archetypes: {
     buttonArchetype: {
       selector: "button.kol-copy-and-paste-icon",

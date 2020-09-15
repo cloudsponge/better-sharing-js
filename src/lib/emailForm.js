@@ -4,14 +4,10 @@ import { addLoadHandler, findAncestor } from './window'
 import platforms, { guessOptionsFromPage, html } from './platforms'
 import options, { defaults, afterUpdateOptions } from './scriptOptions'
 
-const { archetypes } = platforms.currentPlatform
+const { holder, archetypes } = platforms.currentPlatform
 
 // set some reasonable default options here
 defaults({
-  holder: {
-    selector: ".better-sharing-inline-email-form",
-    element: null,
-  },
   cloudsponge: {
     sources: ['gmail', 'yahoo', 'windowslive', 'aol', 'icloud', 'office365', 'outlook', 'addressbook', 'csv'],
   },
@@ -21,16 +17,23 @@ defaults({
 function addEmailFormToPage() {
   guessOptionsFromPage();
 
-  var holderElement = document.querySelector(options().holder.selector) || document.createElement('div');
-  options().holder.element = holderElement
-  options().holder.element.classList.add('row')
-  options().holder.element.classList.add(options().holder.selector.replace(/^\./, ''))
+  let holderElement = document.querySelector(holder.selector)
 
-  var mailtoEl = archetypes.mailtoArchetype.element
-  var parentClass = findAncestor(mailtoEl, '.row');
+  // if we didn't find the holder, then we need to create one and append it
+  //  at an assumed location
+  if (!holderElement) {
+    holderElement = document.createElement('div')
+    // holderElement.classList.add(options().holder.selector.replace(/^\./, ''))
+    // this is a new element so we need to add it to the page
+    const parentClass = findAncestor(archetypes.mailtoArchetype.element, holder.ancestorSelector)
+    parentClass.insertAdjacentElement('afterend', holderElement)
+  }
 
-  holderElement.innerHTML = html(options().mailtoParams);
-  parentClass.insertAdjacentElement('afterend', holderElement);
+  // kickoff labs reqires the row class to be added
+  holderElement.classList.add(...holder.classes)
+
+  // finally, populate the holder with our custom html
+  holderElement.innerHTML = html(options().mailtoParams)
 
   // now it's time to configure the address-book-connector script
   initAddressBookConnector(options())
