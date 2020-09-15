@@ -9,13 +9,17 @@ const defaultOptions    = {}
 const immutableDefaults = {}
 const scriptDataOptions = {}
 const appliedOptions    = {}
-const currentOptions    = {}
+let   currentOptions    = {}
 const afterUpdateCallbacks = []
+
 
 // 
 const updateOptions = (optionSet, args) => {
+  // optionSet is a refernce to the private member
   Object.assign(optionSet, args)
-  Object.assign(currentOptions, defaultOptions, scriptDataOptions, appliedOptions, immutableDefaults)
+  // since one of the private sets update, we'll apply them all now
+  currentOptions = Object.assign({}, defaultOptions, scriptDataOptions, appliedOptions, immutableDefaults)
+
   executeAfterCallback()
   return currentOptions
 }
