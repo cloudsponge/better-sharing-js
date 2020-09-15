@@ -11,18 +11,14 @@ defaults({
   holder: {
     selector: ".bettersharing-inline-email-form",
     element: null,
-    classes: '',
-    styles: {
-      "margin-top": "15px",
-      "margin-bottom": "15px",
-    }
+    classes: ''
   },
   cloudsponge: {
     sources: ['gmail', 'yahoo', 'windowslive', 'aol', 'icloud', 'office365', 'outlook', 'addressbook', 'csv'],
   },
 })
 
-// applies/inherits the classnames and styles from an archetype 
+// applies/inherits the classnames and styles from an archetype
 function applyProps(element, parentProps) {
   // don't re-init or continue if no element was found
   if (!element) {
