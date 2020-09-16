@@ -15,7 +15,7 @@ defaults({
 
 // create the form and add it to the page
 function addEmailFormToPage() {
-  guessOptionsFromPage();
+  guessOptionsFromPage()
 
   let holderElement = document.querySelector(holder.selector)
 

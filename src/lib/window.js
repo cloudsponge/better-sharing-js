@@ -19,8 +19,8 @@ export const findAncestor = (el, sel) => {
 export const addLoadHandler = (handler) => {
   if (document.readyState == 'complete') {
     handler()
-  } else if (document.addEventListener) {
-    document.addEventListener("DOMContentLoaded", handler)
+  } else if (window.addEventListener) {
+    window.addEventListener("load", handler)
   } else if (document.attachEvent) {
     document.attachEvent('onload', handler)
   }
