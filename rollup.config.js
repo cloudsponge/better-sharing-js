@@ -56,7 +56,7 @@ const targetBuild = (target, opts={prod: false}) => {
   }
   newOptions.plugins = [
     replace({
-      'process.env.TARGET_PLATFORM': target,
+      '${process.env.TARGET_PLATFORM}': target,
     }),
     ...base.plugins,
   ]
