@@ -9,7 +9,7 @@ describe('initArchetypes', () => {
   beforeEach(() => {
     archetypes = {
       buttonArchetype: {
-        selector: "button.kol-copy-and-paste-icon",
+        selector: 'button.kol-copy-and-paste-icon',
         element: null,
         classes: '',
         styles: '',
@@ -20,7 +20,7 @@ describe('initArchetypes', () => {
     beforeEach(() => {
       document.body.innerHTML =
         '<style>' +
-          `.kol-copy-and-paste-icon {height: 10px; width: 11px; padding: 10px; margin: 10px; border: 1px solid}` +
+        `.kol-copy-and-paste-icon {height: 10px; width: 11px; padding: 10px; margin: 10px; border: 1px solid}` +
         '</style>' +
         '<button class="kol-copy-and-paste-icon">' +
         '  <span id="username" />' +

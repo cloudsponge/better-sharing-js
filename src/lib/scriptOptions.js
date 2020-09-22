@@ -6,15 +6,15 @@
 // each takes precedence over the next
 
 // default options set internally that may be overwritten
-const defaultOptions    = {}
+const defaultOptions = {}
 // default options set internally which may not be overwritten
 const immutableDefaults = {}
 // options specified in the script's data-* attributes
 const scriptDataOptions = {}
 // options applied with the options() function
-const appliedOptions    = {}
+const appliedOptions = {}
 // the currently computed options
-let   currentOptions    = {}
+let currentOptions = {}
 // callbacks to be executed after the options are updated anytime
 const afterUpdateCallbacks = []
 
@@ -30,14 +30,20 @@ export const reset = () => {
   return updateOptions()
 }
 
-// 
+//
 const updateOptions = (optionSet, args) => {
   // optionSet is a refernce to the private member
   if (optionSet) {
     Object.assign(optionSet, args)
   }
   // since one of the private sets update, we'll apply them all now
-  currentOptions = Object.assign({}, defaultOptions, scriptDataOptions, appliedOptions, immutableDefaults)
+  currentOptions = Object.assign(
+    {},
+    defaultOptions,
+    scriptDataOptions,
+    appliedOptions,
+    immutableDefaults
+  )
 
   executeAfterCallback()
   return currentOptions
@@ -47,7 +53,7 @@ const executeAfterCallback = () => {
   afterUpdateCallbacks.forEach((cb) => cb(currentOptions))
 }
 
-export const afterUpdateOptions = callback => {
+export const afterUpdateOptions = (callback) => {
   afterUpdateCallbacks.push(callback)
 }
 
@@ -57,11 +63,17 @@ export const init = () => {
   //  but can also be defeated if this code executes in a callback. so to be clever, we're going to
   //  check for any script with a bettersharing-* data attribute or a script that includes a better-sharing.js built file
   const thisScript =
-      document.currentScript || // most browsers support currentScript, which is nice and easy
-      document.querySelector('[data-better-sharing-key]') || // IE does not so we'll look for any script with our expected data attribute
-      Array.from(document.querySelectorAll('script')).find(script => { // failing that, we'll look for the script based on it containing any data-bettersharing-* attributes
-        return script.src.match(/better-sharing[^\/]+\.js/) || Object.keys(script.dataset).find(key => key.startsWith('betterSharing'))
-      })
+    document.currentScript || // most browsers support currentScript, which is nice and easy
+    document.querySelector('[data-better-sharing-key]') || // IE does not so we'll look for any script with our expected data attribute
+    Array.from(document.querySelectorAll('script')).find((script) => {
+      // failing that, we'll look for the script based on it containing any data-bettersharing-* attributes
+      return (
+        script.src.match(/better-sharing[^\/]+\.js/) ||
+        Object.keys(script.dataset).find((key) =>
+          key.startsWith('betterSharing')
+        )
+      )
+    })
 
   if (thisScript) {
     updateOptions(scriptDataOptions, thisScript.dataset)
@@ -72,7 +84,7 @@ export const init = () => {
 init()
 
 // sets the default options for this instance and returns the full set of defaults
-export const defaults = (args=null, immutable=false) => {
+export const defaults = (args = null, immutable = false) => {
   if (args) {
     if (immutable) {
       updateOptions(immutableDefaults, args)
@@ -84,7 +96,7 @@ export const defaults = (args=null, immutable=false) => {
 }
 
 // sets the appliedOptions, calculates and returns the currentOptions
-const options = (args=null) => {
+const options = (args = null) => {
   if (args) {
     return updateOptions(appliedOptions, args)
   }

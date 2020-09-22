@@ -1,11 +1,11 @@
-// here's a structured datum that identifies the DOM elements which are to be added to the 
+// here's a structured datum that identifies the DOM elements which are to be added to the
 //  page to support the email form.
 
 const domMap = {
   holder: {
     selector: '.bettersharing-inline-email-form',
     children: {
-      alert: {selector: '.bettersharing-email-alert'},
+      alert: { selector: '.bettersharing-email-alert' },
       form: {
         selector: '.bettersharing-email-form',
         children: {
@@ -15,18 +15,23 @@ const domMap = {
               formGroupRecipient: {
                 selector: '.bettersharing-email-recipient-form-group',
                 children: {
-                  recipientInput: {selector: '.bettersharing-email-recipient-input'},
+                  recipientInput: {
+                    selector: '.bettersharing-email-recipient-input',
+                  },
                   contactPickerGroupButton: {
-                    selector: '.bettersharing-email-contact-picker-group-button',
+                    selector:
+                      '.bettersharing-email-contact-picker-group-button',
                     children: {
                       contactPickerButton: {
                         selector: '.bettersharing-email-contact-picker-button',
                         children: {
                           contactPickerButtonIcon: {
-                            selector: '.bettersharing-email-contact-picker-button-icon',
+                            selector:
+                              '.bettersharing-email-contact-picker-button-icon',
                           },
                           contactPickerButtonLabel: {
-                            selector: '.bettersharing-email-contact-picker-button-label',
+                            selector:
+                              '.bettersharing-email-contact-picker-button-label',
                           },
                         },
                       },
@@ -42,7 +47,7 @@ const domMap = {
               formGroupBody: {
                 selector: '.bettersharing-email-body-form-group',
                 children: {
-                  bodyInput: {selector: '.bettersharing-email-body-input'},
+                  bodyInput: { selector: '.bettersharing-email-body-input' },
                   sendGroupButton: {
                     selector: '.bettersharing-email-send-group-button',
                     children: {
@@ -57,7 +62,7 @@ const domMap = {
                           },
                         },
                       },
-                    }
+                    },
                   },
                 },
               },

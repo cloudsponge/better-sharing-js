@@ -2,8 +2,8 @@ import resolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import replace from '@rollup/plugin-replace'
-import strip from '@rollup/plugin-strip';
-import { uglify } from 'rollup-plugin-uglify';
+import strip from '@rollup/plugin-strip'
+import { uglify } from 'rollup-plugin-uglify'
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
 
 const babelOptions = require('./babel.config')
@@ -21,7 +21,7 @@ const baseBuild = {
       ...babelOptions,
     }),
     resolve({
-      extensions: ['.js']
+      extensions: ['.js'],
     }),
     commonjs({
       include: 'node_modules/**',
@@ -30,28 +30,22 @@ const baseBuild = {
   ],
 }
 
-const minifiedOptions = base => {
-  const newOptions = {...base}
-  newOptions.plugins = [
-    ...base.plugins,
-    strip({ debugger: true }),
-    uglify(),
-  ]
+const minifiedOptions = (base) => {
+  const newOptions = { ...base }
+  newOptions.plugins = [...base.plugins, strip({ debugger: true }), uglify()]
   return newOptions
 }
 
-const targetBuild = (target, opts={prod: false}) => {
-  const base = opts.prod ?
-    minifiedOptions(baseBuild) :
-    baseBuild
-  const targetName = opts.prod ?
-    `better-sharing-${target}-min` :
-    `better-sharing-${target}-debug`
+const targetBuild = (target, opts = { prod: false }) => {
+  const base = opts.prod ? minifiedOptions(baseBuild) : baseBuild
+  const targetName = opts.prod
+    ? `better-sharing-${target}-min`
+    : `better-sharing-${target}-debug`
 
-  const newOptions = {...base}
+  const newOptions = { ...base }
   newOptions.output = {
     ...base.output,
-    name: "betterSharing",
+    name: 'betterSharing',
     file: `packages/${target}/${targetName}.js`,
   }
   newOptions.plugins = [
@@ -66,5 +60,5 @@ const targetBuild = (target, opts={prod: false}) => {
 
 export default [
   targetBuild('kickoff-labs'),
-  targetBuild('kickoff-labs', {prod: true}),
-];
+  targetBuild('kickoff-labs', { prod: true }),
+]

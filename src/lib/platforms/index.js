@@ -1,4 +1,4 @@
-import options from '../scriptOptions';
+import options from '../scriptOptions'
 //import currentPlatform, { css, html } from `./${process.env.TARGET_PLATFORM}`
 // loads the target platform using require so that we can run the tests as well as
 // use replacement for the build process.
@@ -6,7 +6,7 @@ const currentPlatform = require(`./${process.env.TARGET_PLATFORM}`)
 const { holder, archetypes, css, html } = currentPlatform
 
 const initArchetype = (props) => {
-  props.element = props.element || document.querySelector(props.selector);
+  props.element = props.element || document.querySelector(props.selector)
 
   // don't re-init or continue if no element was found
   if (!props.element || props._initialized) {
@@ -29,12 +29,11 @@ const initArchetype = (props) => {
     --height: ${computedStyles.height};
   `
 
-  props.styles = newStyles;
+  props.styles = newStyles
 
   // finished init!
-  props._initialized = true;
+  props._initialized = true
 }
-
 
 // guess the button and other styles from elements that may exist on the page
 const guessOptionsFromPage = () => {
@@ -46,19 +45,17 @@ const guessOptionsFromPage = () => {
   // parse out the mailto params for subject/body/to/from/cc/bcc, etc
   options().mailtoParams = {}
   if (archetypes.mailtoArchetype.element) {
-    const mailtoParamsArray = archetypes.mailtoArchetype.element.href.split(/[?&=]/).slice(1)
+    const mailtoParamsArray = archetypes.mailtoArchetype.element.href
+      .split(/[?&=]/)
+      .slice(1)
     for (let i = 0; i < mailtoParamsArray.length; i += 2) {
-      options().mailtoParams[mailtoParamsArray[i]] = decodeURIComponent(mailtoParamsArray[i+1])
+      options().mailtoParams[mailtoParamsArray[i]] = decodeURIComponent(
+        mailtoParamsArray[i + 1]
+      )
     }
   }
 }
 
-export {
-  holder,
-  archetypes,
-  html,
-  initArchetype,
-  guessOptionsFromPage,
-}
+export { holder, archetypes, html, initArchetype, guessOptionsFromPage }
 
 export default currentPlatform

@@ -7,7 +7,17 @@ import options, { defaults, afterUpdateOptions } from './scriptOptions'
 // set some reasonable default options here
 defaults({
   cloudsponge: {
-    sources: ['gmail', 'yahoo', 'windowslive', 'aol', 'icloud', 'office365', 'outlook', 'addressbook', 'csv'],
+    sources: [
+      'gmail',
+      'yahoo',
+      'windowslive',
+      'aol',
+      'icloud',
+      'office365',
+      'outlook',
+      'addressbook',
+      'csv',
+    ],
   },
 })
 
@@ -22,7 +32,10 @@ export const addEmailFormToPage = () => {
     holderElement = document.createElement('div')
     // holderElement.classList.add(options().holder.selector.replace(/^\./, ''))
     // this is a new element so we need to add it to the page
-    const parentClass = findAncestor(archetypes.mailtoArchetype.element, holder.ancestorSelector)
+    const parentClass = findAncestor(
+      archetypes.mailtoArchetype.element,
+      holder.ancestorSelector
+    )
     parentClass.insertAdjacentElement('afterend', holderElement)
   }
 
@@ -37,15 +50,24 @@ export const addEmailFormToPage = () => {
 }
 
 export const success = () => {
-  const contacts = document.querySelector('[data-addressBookConnector-js] .cloudsponge-contacts') || document.createElement('input')
+  const contacts =
+    document.querySelector(
+      '[data-addressBookConnector-js] .cloudsponge-contacts'
+    ) || document.createElement('input')
   const emails = contacts.value
-  document.getElementById('status-message').innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">We sent an email to ${emails}.</div>`
+  document.getElementById('status-message').innerHTML =
+    '<div class="alert alert-success alert-dismissible fade show" role="alert">' +
+    `We sent an email to ${emails}.</div>`
   // clear the contacts field
   contacts.value = ''
 }
 export const failure = (data) => {
-  console.error('[BetterSharing] There was a problem sending the email: ', data);
-  document.getElementById('status-message').innerHTML = '<div class="alert alert-warning alert-dismissible fade show" role="alert">We failed to send any email: '+data.responseText+'.<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
+  console.error('[BetterSharing] There was a problem sending the email: ', data)
+  document.getElementById('status-message').innerHTML =
+    '<div class="alert alert-warning alert-dismissible fade show" role="alert">We failed to send any email: ' +
+    data.responseText +
+    '.<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+    '<span aria-hidden="true">&times;</span></button></div>'
 }
 
 export const initAddressBookConnector = (opts) => {

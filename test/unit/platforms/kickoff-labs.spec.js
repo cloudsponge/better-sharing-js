@@ -1,14 +1,28 @@
-import { holder, archetypes, css, html } from '../../../src/lib/platforms/kickoff-labs'
+import {
+  holder,
+  archetypes,
+  css,
+  html,
+} from '../../../src/lib/platforms/kickoff-labs'
 
 describe('holder', () => {
   it('has the expected properties', () => {
-    expect(Object.keys(holder)).toEqual(['selector', 'classes', 'ancestorSelector'])
+    expect(Object.keys(holder)).toEqual([
+      'selector',
+      'classes',
+      'ancestorSelector',
+    ])
   })
 })
 
 describe('archetypes', () => {
   it('has the expected properties', () => {
-    expect(Object.keys(archetypes)).toEqual(['buttonArchetype', 'iconArchetype', 'inputArchetype', 'mailtoArchetype'])
+    expect(Object.keys(archetypes)).toEqual([
+      'buttonArchetype',
+      'iconArchetype',
+      'inputArchetype',
+      'mailtoArchetype',
+    ])
   })
 })
 
