@@ -63,7 +63,6 @@ export const html = (mailtoParams = {}) => {
                 placeholder="To: (enter contact&rsquo;s email)"
                 required="required"
                 aria-describedby="#emailHelp" />
-            // '<small class="form-text text-muted" id="emailHelp">Separate multiple emails with commas.</small>'+
             <div class="input-group-btn better-sharing-input-group-contact-button">
               <button class="cloudsponge-launch btn better-sharing-contact-button">
                 <i class="fa fa-address-card better-sharing-icon"></i> Add From Contacts
@@ -81,7 +80,7 @@ export const html = (mailtoParams = {}) => {
           <div class="input-group">
             <div class="input-group-btn better-sharing-input-group-send-button">
               <button
-                  id="better-sharing-send-invites" 
+                  id="better-sharing-send-invites"
                   class="btn better-sharing-send-button"
                   name="button"
                   type="submit">
@@ -134,6 +133,8 @@ export const archetypes = {
 const kickoffLabs = {
   holder,
   archetypes,
+  html,
+  css,
 }
 
 export default kickoffLabs
