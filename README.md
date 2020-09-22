@@ -1,6 +1,6 @@
 # better-sharing.js
 
-[![Build Status](https://travis-ci.org/cloudsponge/better-sharing-js.svg?branch=master)](https://travis-ci.org/cloudsponge/better-sharing-js)
+[![Build Status](https://api.travis-ci.org/cloudsponge/better-sharing-js.svg?branch=main)](https://travis-ci.org/cloudsponge/better-sharing-js)
 
 BetterSharing adds a better way to send email referrals by creating a form that you can add to any page.
 
