@@ -1,11 +1,9 @@
-import currentPlatform, { css, html } from './process.env.TARGET_PLATFORM'
-import options from '../scriptOptions'
-
-const platforms = {
-  currentPlatform,
-}
-
-const { archetypes } = platforms.currentPlatform
+import options from '../scriptOptions';
+//import currentPlatform, { css, html } from `./${process.env.TARGET_PLATFORM}`
+// loads the target platform using require so that we can run the tests as well as
+// use replacement for the build process.
+const currentPlatform = require(`./${process.env.TARGET_PLATFORM}`)
+const { holder, archetypes, css, html } = currentPlatform
 
 const initArchetype = (props) => {
   props.element = props.element || document.querySelector(props.selector);
@@ -46,16 +44,21 @@ const guessOptionsFromPage = () => {
   initArchetype(archetypes.inputArchetype)
 
   // parse out the mailto params for subject/body/to/from/cc/bcc, etc
-  var mailtoParamsArray = archetypes.mailtoArchetype.element.href.split(/[?&=]/).slice(1)
   options().mailtoParams = {}
-  for (var i = 0; i < mailtoParamsArray.length; i += 2) {
-    options().mailtoParams[mailtoParamsArray[i]] = decodeURIComponent(mailtoParamsArray[i+1])
+  if (archetypes.mailtoArchetype.element) {
+    const mailtoParamsArray = archetypes.mailtoArchetype.element.href.split(/[?&=]/).slice(1)
+    for (let i = 0; i < mailtoParamsArray.length; i += 2) {
+      options().mailtoParams[mailtoParamsArray[i]] = decodeURIComponent(mailtoParamsArray[i+1])
+    }
   }
 }
 
 export {
+  holder,
+  archetypes,
   html,
+  initArchetype,
   guessOptionsFromPage,
 }
 
-export default platforms
+export default currentPlatform

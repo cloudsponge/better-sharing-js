@@ -7,21 +7,24 @@
 // }
 
 // we need a document object for these functions
-const document = window.document
+const document = window.document;
 
 // DOM utility that locates the nearest ancestor by a selector
 export const findAncestor = (el, sel) => {
-  while ((el = el.parentElement) && !((el.matches || el.matchesSelector).call(el,sel)));
+  while (
+    (el = el.parentElement) &&
+    !(el.matches || el.matchesSelector).call(el, sel)
+  );
   return el;
-}
+};
 
 // utility function to execute a script after the page completes loading
 export const addLoadHandler = (handler) => {
   if (document.readyState == 'complete') {
-    handler()
+    handler();
   } else if (window.addEventListener) {
-    window.addEventListener("load", handler)
+    window.addEventListener('load', handler);
   } else if (document.attachEvent) {
-    document.attachEvent('onload', handler)
+    document.attachEvent('onload', handler);
   }
-}
+};

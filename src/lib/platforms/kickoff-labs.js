@@ -6,7 +6,6 @@
 // input: font-size, colors, padding, margins
 
 export const css = () => {
-  const { holder, archetypes } = kickoffLabs
   return `<style>
     ${holder.selector} {
       margin-top: 15px;
@@ -85,40 +84,44 @@ export const html = (mailtoParams={}) => {
   '</div>'
 }
 
-const kickoffLabs = {
-  holder: {
-    selector: ".better-sharing-inline-email-form",
-    classes: ["row", "better-sharing-inline-email-form"],
-    ancestorSelector: '.row',
+export const holder = {
+  selector: ".better-sharing-inline-email-form",
+  classes: ["row", "better-sharing-inline-email-form"],
+  ancestorSelector: '.row',
+}
+
+export const archetypes = {
+  buttonArchetype: {
+    selector: "button.kol-copy-and-paste-icon",
+    element: null,
+    classes: '',
+    styles: '',
   },
-  archetypes: {
-    buttonArchetype: {
-      selector: "button.kol-copy-and-paste-icon",
-      element: null,
-      classes: '',
-      styles: '',
-    },
 
-    iconArchetype: {
-      styles: {
-        display: 'inline-block',
-      },
+  iconArchetype: {
+    styles: {
+      display: 'inline-block',
     },
+  },
 
-    inputArchetype: {
-      selector: "input.kol-copy-and-paste-sharelink",
-      element: null,
-      classes: '',
-      styles: '',
-    },
+  inputArchetype: {
+    selector: "input.kol-copy-and-paste-sharelink",
+    element: null,
+    classes: '',
+    styles: '',
+  },
 
-    mailtoArchetype: {
-      selector: "a[href*=mailto]",
-      element: null,
-      classes: '',
-      styles: '',
-    },
-  }
+  mailtoArchetype: {
+    selector: "a[href*=mailto]",
+    element: null,
+    classes: '',
+    styles: '',
+  },
+}
+
+const kickoffLabs = {
+  holder,
+  archetypes,
 }
 
 export default kickoffLabs
