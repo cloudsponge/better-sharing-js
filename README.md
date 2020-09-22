@@ -30,8 +30,8 @@ Optionally, configure your betterSharing object with more options:
 
 ## Configure CloudSponge & Zapier
 
-0. Add the <div> to your page
-0. Add the <script> to your footer (with your CS key)
+0. Add the &lt;div> to your page
+0. Add the &lt;script> to your footer (with your CS key)
 0. Connect CloudSponge to Zapier
 0. Submit the form once to train Zapier
 0. Create your Zap
