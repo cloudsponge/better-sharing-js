@@ -1,5 +1,7 @@
 # better-sharing.js
 
+[![Build Status](https://travis-ci.org/cloudsponge/better-sharing-js.svg?branch=master)](https://travis-ci.org/cloudsponge/better-sharing-js)
+
 BetterSharing adds a better way to send email referrals by creating a form that you can add to any page.
 
 ## Installation
@@ -28,4 +30,8 @@ Optionally, configure your betterSharing object with more options:
 
 ## Configure CloudSponge & Zapier
 
-TK
+0. Add the <div> to your page
+0. Add the <script> to your footer (with your CS key)
+0. Connect CloudSponge to Zapier
+0. Submit the form once to train Zapier
+0. Create your Zap
