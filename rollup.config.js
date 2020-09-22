@@ -1,5 +1,5 @@
-import resolve from 'rollup-plugin-node-resolve'
-import babel from 'rollup-plugin-babel'
+import resolve from '@rollup/plugin-node-resolve'
+import babel from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import re from 'rollup-plugin-re'
 import strip from '@rollup/plugin-strip'
@@ -17,7 +17,7 @@ const baseBuild = {
   plugins: [
     babel({
       exclude: 'node_modules/**',
-      runtimeHelpers: true,
+      babelHelpers: 'bundled',
       ...babelOptions,
     }),
     resolve({
