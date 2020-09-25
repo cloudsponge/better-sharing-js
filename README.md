@@ -2,13 +2,13 @@
 
 [![Build Status](https://api.travis-ci.org/cloudsponge/better-sharing-js.svg?branch=main)](https://travis-ci.org/cloudsponge/better-sharing-js)
 
-BetterSharing adds a better way to send email referrals by creating a form that you can add to any page.
+Better Sharing adds a better way to send email referrals by creating a form that you can add to any page.
 
 ## Installation
 
 Add this HTML content to the page to specify where the form should be added, otherwise, we'll pick a place for you:
 
-    <div class="bettersharing-inline-email-form">The Better Sharing inline email form will load here.</div>
+    <div class="better-sharing-inline-email-form">The Better Sharing inline email form will load here.</div>
 
 Add the script to your page:
 
