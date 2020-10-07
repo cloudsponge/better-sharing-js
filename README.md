@@ -13,7 +13,7 @@ Add this HTML content to the page to specify where the form should be added, oth
 Add the script to your page:
 
     <script
-        src="https://unpkg.com/@cloudsponge/better-sharing-kickoff-pages.js"
+        src="https://unpkg.com/@cloudsponge/better-sharing-kickoff-labs.js"
         data-cloudsponge-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
         crossorigin="anonymous">
     </script>
