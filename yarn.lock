@@ -848,9 +848,11 @@
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
 "@cloudsponge/address-book-connector.js@^1.0.10":
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/@cloudsponge/address-book-connector.js/-/address-book-connector.js-1.0.10.tgz#675493b1cdfec991e3799193825fc681008089cf"
-  integrity sha512-xi0st/zWbMY+sFns595FpyOH4KBpeTJdh/4LkscqJAXyyRwhANEixBQ0paW6GlmP9HHarPDkJe9jkjy9RlNzVA==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@cloudsponge/address-book-connector.js/-/address-book-connector.js-1.1.0.tgz#d228e9b115aaf922313c0d22cd2377bbf21b8ca0"
+  integrity sha512-uZL9CnW+WaDe8BUT3i6N+4BLgxFyES4ad14L6JA/TKbtj0OpJxNeWWsYK5eg1Jom9PBY+U/k3BFIhdhFL9iYqg==
+  dependencies:
+    serialize-javascript ">=2.1.1"
 
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
@@ -5502,6 +5504,13 @@ semver@^7.2.1, semver@^7.3.2:
   version "7.3.2"
   resolved "https://registry.yarnpkg.com/semver/-/semver-7.3.2.tgz#604962b052b81ed0786aae84389ffba70ffd3938"
   integrity sha512-OrOb32TeeambH6UrhtShmF7CRDqhL6/5XpPNp2DuRH6+9QLw/orhp72j87v8Qa1ScDkvrrBNpZcDejAirJmfXQ==
+
+serialize-javascript@>=2.1.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-5.0.1.tgz#7886ec848049a462467a97d3d918ebb2aaf934f4"
+  integrity sha512-SaaNal9imEO737H2c05Og0/8LUXG7EnsZyMa8MzkmuHoELfT6txuj0cMqRj6zfPKnmQ1yasR4PCJc8x+M4JSPA==
+  dependencies:
+    randombytes "^2.1.0"
 
 serialize-javascript@^2.1.2:
   version "2.1.2"
