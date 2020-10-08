@@ -73,6 +73,10 @@ export const failure = (data) => {
 export const initAddressBookConnector = (opts) => {
   addressBookConnector.setOptions({
     key: opts.key || opts.cloudspongeKey || opts.betterSharingKey,
+    subject: opts.subject,
+    body: opts.body,
+    reply_to_email: opts.reply_to_email,
+    reply_to_name: opts.reply_to_name,
     cloudspongeOptions: {
       ...opts.cloudsponge,
     },
