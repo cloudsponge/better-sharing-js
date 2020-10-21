@@ -3,6 +3,7 @@ import * as emailFormExports from '../../src/lib/emailForm'
 const emailForm = emailFormExports.default
 const {
   addEmailFormToPage,
+  emailOpts,
   initAddressBookConnector,
   success,
   failure,
@@ -61,6 +62,29 @@ describe('addEmailFormToPage', () => {
   })
 })
 
+describe('emailOpts', () => {
+  it('extracts only the expected key-values', () => {
+    const options = {
+      subject: 'subject',
+      body: 'body',
+      senderEmail: 'senderEmail',
+      defaultSenderName: 'defaultSenderName',
+      defaultReplyToEmail: 'defaultReplyToEmail',
+      defaultReplyToName: 'defaultReplyToName',
+      otherOptions: {},
+    }
+    const emailOptions = emailOpts(options)
+    expect(Object.keys(emailOptions)).toEqual([
+      'subject',
+      'body',
+      'senderEmail',
+      'defaultSenderName',
+      'defaultReplyToEmail',
+      'defaultReplyToName',
+    ])
+  })
+})
+
 describe('initAddressBookConnector', () => {
   it('sets the addressBookConnector options', () => {
     const optionsSpy = jest.spyOn(addressBookConnector, 'setOptions')
@@ -93,7 +117,16 @@ describe('success and failure', () => {
   it('appends a failure message to the page', () => {
     // don't clutter the log
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
-    failure({ responseText: 'bad news' })
+    failure({ xhr: { responseText: 'bad news' } })
+    expect(errorSpy).toHaveBeenCalled()
+    expect(document.body.innerHTML).toMatch(
+      '<div class="alert alert-warning alert-dismissible fade show" role="alert">'
+    )
+  })
+  it('appends a default failure message to the page', () => {
+    // don't clutter the log
+    const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    failure({ xhr: { responseText: '' } })
     expect(errorSpy).toHaveBeenCalled()
     expect(document.body.innerHTML).toMatch(
       '<div class="alert alert-warning alert-dismissible fade show" role="alert">'
