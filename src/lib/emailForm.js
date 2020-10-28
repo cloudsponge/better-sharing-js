@@ -65,18 +65,40 @@ export const failure = (data) => {
   console.error('[BetterSharing] There was a problem sending the email: ', data)
   document.getElementById('status-message').innerHTML =
     '<div class="alert alert-warning alert-dismissible fade show" role="alert">We failed to send any email: ' +
-    data.responseText +
+    (data.xhr.responseText ||
+      'This may have been a duplicate email or another unknown error occurred.') +
     '.<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
     '<span aria-hidden="true">&times;</span></button></div>'
+}
+
+export const emailOpts = (opts) => {
+  const emailOptionNames = [
+    'subject',
+    'body',
+    'senderEmail',
+    'defaultSenderName',
+    'defaultReplyToEmail',
+    'defaultReplyToName',
+  ]
+  let emailOpts = {}
+  emailOptionNames.forEach((keyName) => {
+    if (opts[keyName]) {
+      emailOpts[keyName] = opts[keyName]
+    }
+  })
+  return emailOpts
 }
 
 export const initAddressBookConnector = (opts) => {
   addressBookConnector.setOptions({
     key: opts.key || opts.cloudspongeKey || opts.betterSharingKey,
-    subject: opts.subject,
-    body: opts.body,
-    reply_to_email: opts.reply_to_email,
-    reply_to_name: opts.reply_to_name,
+    ...emailOpts(opts),
+    // subject: opts.subject,
+    // body: opts.body,
+    // senderEmail: opts.senderEmail,
+    // defaultSenderName: opts.defaultSenderName,
+    // defaultReplyToEmail: opts.defaultReplyToEmail,
+    // defaultReplyToName: opts.defaultReplyToName,
     cloudspongeOptions: {
       ...opts.cloudsponge,
     },
