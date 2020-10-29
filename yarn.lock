@@ -847,10 +847,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cloudsponge/address-book-connector.js@^1.0.10":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@cloudsponge/address-book-connector.js/-/address-book-connector.js-1.1.0.tgz#d228e9b115aaf922313c0d22cd2377bbf21b8ca0"
-  integrity sha512-uZL9CnW+WaDe8BUT3i6N+4BLgxFyES4ad14L6JA/TKbtj0OpJxNeWWsYK5eg1Jom9PBY+U/k3BFIhdhFL9iYqg==
+"@cloudsponge/address-book-connector.js@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@cloudsponge/address-book-connector.js/-/address-book-connector.js-1.1.1.tgz#af55bad5ae445c494355fdcd58c180ef68807061"
+  integrity sha512-N2rd+WVRYtMPjuaMdD5kUK11w43aW5D0TU9MJBeYd0qhH3EFwJSl0bIMdr0ewqcpSiWtNHGSeG5DbqgloVAQqA==
   dependencies:
     serialize-javascript ">=2.1.1"
 
