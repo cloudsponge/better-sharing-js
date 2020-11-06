@@ -1,6 +1,12 @@
 import { findAncestor, addLoadHandler } from '../../src/lib/window'
 
 describe('findAncestor', () => {
+  it('finds nothing when no element given', () => {
+    expect(findAncestor(null, '')).toEqual(null)
+  })
+  it('finds nothing when element has no parentElement prop', () => {
+    expect(findAncestor({}, '')).toEqual(null)
+  })
   it('finds the parent', () => {
     const parentEl = {
       matches: () => {

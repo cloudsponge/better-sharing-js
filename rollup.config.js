@@ -5,6 +5,10 @@ import re from 'rollup-plugin-re'
 import strip from '@rollup/plugin-strip'
 import { uglify } from 'rollup-plugin-uglify'
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
+import posthtml from 'rollup-plugin-posthtml-template'
+import htmlMinifier from 'rollup-plugin-html-minifier'
+import minifier from 'posthtml-minifier'
+import json from '@rollup/plugin-json'
 
 const babelOptions = require('./babel.config')
 
@@ -15,9 +19,25 @@ const baseBuild = {
     globals: { window: 'window' },
   },
   plugins: [
+    json(),
+    htmlMinifier({
+      // html-minifier options here
+      collapseWhitespace: true,
+    }),
+    posthtml({
+      // include: '**/*.html',
+      template: true,
+      plugins: minifier({
+        removeComments: true,
+        collapseWhitespace: true,
+        // we're unable to use the minifyCSS option while we're replacing strings in it
+        minifyCSS: false,
+      }),
+    }),
     babel({
       exclude: 'node_modules/**',
       babelHelpers: 'bundled',
+      extensions: ['.js', '.html', '.scss'],
       ...babelOptions,
     }),
     resolve({
@@ -42,6 +62,39 @@ const targetBuild = (target, opts = { prod: false }) => {
     ? `better-sharing-${target}-min`
     : `better-sharing-${target}-debug`
 
+  const { holder, archetypes } = require(`./src/lib/platforms/${target}.json`)
+
+  const replacementRes = [
+    {
+      test: /\$\{_\.holder\.selector\}/g,
+      replace: holder.selector || '',
+    },
+    {
+      test: /(?<!\.)holder\.selector/g,
+      replace: JSON.stringify(holder.selector),
+    },
+    {
+      test: /(?<!\.)holder\.ancestorSelector/g,
+      replace: JSON.stringify(holder.ancestorSelector),
+    },
+    {
+      test: /(?<!_\.)holder\.classes/g,
+      replace: JSON.stringify(holder.classes),
+    },
+  ]
+
+  Object.keys(archetypes).forEach((archType) => {
+    replacementRes.push({
+      test: new RegExp(`\\$\\{_\\.archetypes\\.${archType}\\.selector}`),
+      replace: archetypes[archType].selector || '',
+    })
+
+    // replacementRes.push({
+    //   test: new RegExp(`\\$\\{_\\.archetypes\\.${archType}\\.styles}`),
+    //   replace: archetypes[archType].styles || '',
+    // })
+  })
+
   const newOptions = { ...base }
   newOptions.output = {
     ...base.output,
@@ -49,6 +102,9 @@ const targetBuild = (target, opts = { prod: false }) => {
     file: `packages/${target}/${targetName}.js`,
   }
   newOptions.plugins = [
+    re({
+      patterns: replacementRes,
+    }),
     // replace any instance of our TARGET_PLATFORM within a string
     re({
       patterns: [
@@ -69,6 +125,33 @@ const targetBuild = (target, opts = { prod: false }) => {
     }),
     ...base.plugins,
   ]
+
+  return newOptions
+}
+
+const customBuild = (
+  opts = { prod: false, input: './index.js', output: {} }
+) => {
+  const base = opts.prod ? minifiedOptions(baseBuild) : baseBuild
+  const newOptions = { ...base }
+
+  // specify the input
+  newOptions.input = opts.input
+  // specify the output
+  newOptions.output = {
+    ...base.output,
+    ...opts.output,
+  }
+
+  if (opts.plugins) {
+    newOptions.plugins = [...base.plugins, ...opts.plugins]
+  }
+  if (opts.pluginsPre) {
+    newOptions.plugins = [...opts.pluginsPre, ...newOptions.plugins]
+  }
+  if (opts.babelOpts) {
+    newOptions
+  }
 
   return newOptions
 }

@@ -17,6 +17,8 @@ const appliedOptions = {}
 let currentOptions = {}
 // callbacks to be executed after the options are updated anytime
 const afterUpdateCallbacks = []
+// state var to prevent infinite recursion
+let updatingOptions = false
 
 export const resetOptions = (optionSet) => {
   Object.keys(optionSet).forEach((key) => {
@@ -45,7 +47,16 @@ const updateOptions = (optionSet, args) => {
     immutableDefaults
   )
 
-  executeAfterCallback()
+  if (!updatingOptions) {
+    updatingOptions = true
+    try {
+      executeAfterCallback()
+    } catch (e) {
+      // do nada
+    }
+    updatingOptions = false
+  }
+
   return currentOptions
 }
 

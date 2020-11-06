@@ -1,7 +1,6 @@
 import {
   holder,
   archetypes,
-  css,
   html,
 } from '../../../src/lib/platforms/kickoff-labs'
 
@@ -28,14 +27,14 @@ describe('archetypes', () => {
 
 describe('css', () => {
   it('returns a style tag', () => {
-    expect(css()).toMatch(/^<style>/)
-    expect(css()).toMatch(/<\/style>$/m)
+    expect(html()).toMatch(/^<style>/m)
+    expect(html()).toMatch(/<\/style>$/m)
   })
 })
 
 describe('html', () => {
   it('returns a div tag', () => {
-    expect(html()).toMatch(/<div class="better-sharing-email-form">/)
+    expect(html()).toMatch(/<div class="better-sharing-email-form">/g)
     expect(html()).toMatch(/<\/div>$/m)
   })
 })

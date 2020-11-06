@@ -11,6 +11,9 @@ const document = window.document
 
 // DOM utility that locates the nearest ancestor by a selector
 export const findAncestor = (el, sel) => {
+  if (!(el && el.parentElement)) {
+    return null
+  }
   while (
     (el = el.parentElement) &&
     !(el.matches || el.matchesSelector).call(el, sel)

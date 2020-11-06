@@ -137,4 +137,13 @@ describe('options', () => {
     options({})
     expect(callback).toHaveBeenCalled()
   })
+  it('avoids infinite recursion', () => {
+    const callback = jest.fn().mockImplementation(() => {
+      options({ new: 'data' })
+    })
+    afterUpdateOptions(callback)
+    options({})
+    expect(callback).toHaveBeenCalled()
+    expect(callback.mock.calls.length).toEqual(1)
+  })
 })
