@@ -6,13 +6,12 @@
   }
   .better-sharing-container .better-sharing-button {
     position: absolute;
-    top: 0;
-    right: 0;
-    margin: 3px 0;
+    top: 0; right: 0;
     height: 33px; width: 33px;
+    margin: 3px;
     background-image: url(${_.svg});
-    background-repeat: no-repeat;
+    background-size: cover;
   }
   </style>
-  <span class="better-sharing-button cloudsponge-launch"></span>
+  <span class="better-sharing-button cloudsponge-launch" title="${_.tooltip}"></span>
 </div>
