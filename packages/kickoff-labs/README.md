@@ -1,12 +1,12 @@
-# better-sharing-kickoff-labs.js
+Better# better-sharing-kickoff-labs.js
 
-BetterSharing adds a better way to send email referrals by creating a form that you can add to your [KickoffLabs](https://kickofflabs.com/) campaign.
+Better Sharing adds a better way to send email referrals by creating a form that you can add to your [KickoffLabs](https://kickofflabs.com/) campaign.
 
 ## Installation
 
 Add this HTML content to the page to specify where the form should be added, otherwise, we'll pick a place for you:
 
-    <div class="better-sharing-inline-email-form">BetterSharing will load here. 🔧 Made with ❤️ by CloudSponge.</div>
+    <div class="better-sharing-inline-email-form">Better Sharing will load here. 🔧 Made with ❤️ by CloudSponge.</div>
 
 Add the script to your page:
 
