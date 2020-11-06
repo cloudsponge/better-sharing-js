@@ -1,0 +1,33 @@
+{
+  "holder": {
+    "selector": ".better-sharing-inline-email-form",
+    "classes": ["row", "better-sharing-inline-email-form"],
+    "ancestorSelector": ".row"
+  },
+  "archetypes": {
+    "buttonArchetype": {
+      "selector": "button.kol-copy-and-paste-icon",
+      "element": null,
+      "classes": "",
+      "styles": ""
+    },
+
+    "iconArchetype": {
+      "styles": "display: inline-block;"
+    },
+
+    "inputArchetype": {
+      "selector": "input.kol-copy-and-paste-sharelink",
+      "element": null,
+      "classes": "",
+      "styles": ""
+    },
+
+    "mailtoArchetype": {
+      "selector": "a[href*=mailto]",
+      "element": null,
+      "classes": "",
+      "styles": ""
+    }
+  }
+}

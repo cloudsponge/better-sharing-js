@@ -1,5 +1,4 @@
 import options from '../scriptOptions'
-//import currentPlatform, { css, html } from `./${process.env.TARGET_PLATFORM}`
 // loads the target platform using require so that we can run the tests as well as
 // use replacement for the build process.
 const currentPlatform = require(`./${process.env.TARGET_PLATFORM}`)
