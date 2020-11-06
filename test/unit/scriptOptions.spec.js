@@ -139,7 +139,7 @@ describe('options', () => {
   })
   it('avoids infinite recursion', () => {
     const callback = jest.fn().mockImplementation(() => {
-      options({new: 'data'})
+      options({ new: 'data' })
     })
     afterUpdateOptions(callback)
     options({})
