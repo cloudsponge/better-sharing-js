@@ -5,7 +5,7 @@
     "./"
   ],
   "version": "0.1.5",
-  "description": "BetterSharing adds an email sharing form to your KickoffLabs campaign.",
+  "description": "Better Sharing adds an email sharing form to your KickoffLabs campaign.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cloudsponge/better-sharing-js.git"
