@@ -5,7 +5,7 @@
     </clipPath>
   </defs>
   <g id="icon-1" clip-path="url(#clip-icon-1)">
-    <rect width="24" height="24" fill="#fff"/>
+    <rect width="24" height="24" fill="#fff" fill-opacity="0"/>
     <g id="Rectangle_1" data-name="Rectangle 1" transform="translate(3 1)" fill="#fff" stroke="#000" stroke-width="2">
       <rect width="19" height="22" rx="4" stroke="none"/>
       <rect x="1" y="1" width="17" height="20" rx="3" fill="none"/>
