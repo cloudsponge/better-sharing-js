@@ -11,7 +11,6 @@ import minifier from 'posthtml-minifier'
 import url from '@rollup/plugin-url'
 import json from '@rollup/plugin-json'
 
-
 const babelOptions = require('./babel.config')
 
 const baseBuild = {
@@ -215,8 +214,9 @@ export default [
   customBuild({
     input: './src/platforms/shopify/conjured-referrals/betterSharing.js',
     output: {
-      name: 'contactPicker',
-      file: './packages/shopify/conjured-referrals/better-sharing-shopify-conjured-referrals.js',
+      name: 'betterSharing',
+      file:
+        './packages/shopify/conjured-referrals/better-sharing-shopify-conjured-referrals.js',
       format: 'iife',
       globals: { window: 'window' },
     },

@@ -11,11 +11,7 @@ const html = (mailtoParams = {}) => {
   })
 }
 
-export {
-  html,
-  holder,
-  archetypes,
-}
+export { html, holder, archetypes }
 
 const kickoffLabs = {
   html,
