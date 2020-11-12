@@ -41,6 +41,7 @@
     "@rollup/plugin-url": "^5.0.1",
     "core-js": "^3.6.5",
     "html-loader-jest": "^0.2.1",
+    "identity-obj-proxy": "^3.0.0",
     "posthtml-minifier": "^0.1.0",
     "rollup": "^2.26.11",
     "rollup-plugin-html-minifier": "^1.1.0",

@@ -1,29 +1,32 @@
 import { addJavascript } from '../../../lib/utils'
 import { findAncestor } from '../../../lib/window'
-import options, { defaults, afterUpdateOptions } from '../../../lib/scriptOptions'
+import options, {
+  defaults,
+  afterUpdateOptions,
+} from '../../../lib/scriptOptions'
 import svg from './icon.svg'
 import template from './template.html'
-
-// const containerClass = 'better-sharing-container'
 
 defaults({
   // the css class for the element that will wrap the input that we get attached to
   containerClass: 'better-sharing-container',
+  selector: '#conjured_emails',
+  tooltip: 'Pick your contacts from your address book',
 })
 
-const isReady = () => {
+export const isReady = () => {
   if (document.getElementById('conjured_advocate_share_email')) {
     return true
   }
   return false
 }
 
-const whenReady = (executable, times=0) => {
+export const whenReady = (executable, times = 0) => {
   if (isReady()) {
     executable()
   } else if (times < 10) {
     // check again in 1 second, to a maximum of 10 seconds
-    setTimeout(() => whenReady(executable, times+1), 1000)
+    setTimeout(() => whenReady(executable, times + 1), 1000)
   } else {
     // well, something messed up and we couldn't find what we needed so
     //  give up and let the console know about it...
@@ -33,15 +36,21 @@ const whenReady = (executable, times=0) => {
 
 // 1. initialization of the cloudsponge script
 // 2. initialization of the UI
-const init = () => {
-  const { key, selector, containerClass } = options()
+export const init = () => {
+  const { key, selector, containerClass, tooltip } = options()
   // add the cloudsponge contact picker to the page
   if (key) {
     // add the cloudsponge javascript
-    addJavascript(`https://api.cloudsponge.com/widget/${key}.js`, 'cloudsponge-script', () => {
-      // initialize the cloudsponge object here since we may be calling this function a subsequent time
-      cloudsponge.init()
-    })
+    addJavascript(
+      `https://api.cloudsponge.com/widget/${key}.js`,
+      'cloudsponge-script',
+      () => {
+        // initialize the cloudsponge object here since we may be calling this function a subsequent time
+        if (window.cloudsponge) {
+          cloudsponge.init()
+        }
+      }
+    )
   }
 
   if (selector) {
@@ -49,7 +58,8 @@ const init = () => {
     const targetInput = document.querySelector(selector)
     if (targetInput && !findAncestor(targetInput, `.${containerClass}`)) {
       targetInput.classList.add('cloudsponge-contacts')
-      const outerHTML = template({svg, containerClass, targetInput})
+      console.log(svg)
+      const outerHTML = template({ svg, containerClass, targetInput, tooltip })
 
       // wrap the given input and add the tag
       targetInput.outerHTML = outerHTML
@@ -57,9 +67,11 @@ const init = () => {
   }
 }
 
-const betterSharing = (opts={}) => {
+const betterSharing = (opts) => {
   // merge the options in
-  options(opts)
+  if (opts) {
+    options(opts)
+  }
   // check if the preconditions exist for initializing
   whenReady(init)
 }
@@ -72,7 +84,7 @@ afterUpdateOptions(betterSharing)
 betterSharing()
 
 // usage:
-//  contactPicker({selector: '#conjured_emails', key: '-GlOh6uaT0OvNi51EhGNsQ'})
+//  betterSharing({selector: '#conjured_emails', key: '-GlOh6uaT0OvNi51EhGNsQ'})
 export default betterSharing
 
 // document.querySelector('script[src^="https://app.conjured.co/shopify/referral/widget.js"]')
