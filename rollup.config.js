@@ -8,6 +8,7 @@ import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
 import posthtml from 'rollup-plugin-posthtml-template'
 import htmlMinifier from 'rollup-plugin-html-minifier'
 import minifier from 'posthtml-minifier'
+import url from '@rollup/plugin-url'
 import json from '@rollup/plugin-json'
 
 const babelOptions = require('./babel.config')
@@ -159,4 +160,86 @@ const customBuild = (
 export default [
   targetBuild('kickoff-labs'),
   targetBuild('kickoff-labs', { prod: true }),
+  // {
+  //   input: './contact-picker/index.js',
+  //   output: {
+  //     name: 'contactPicker',
+  //     file: './packages/contact-picker/contact-picker.js',
+  //     format: 'iife',
+  //     globals: { window: 'window' },
+  //   },
+  //   plugins: [
+  //     scss({
+  //       output: false,
+  //     }),
+  //     url(),
+  //     htmlMinifier({
+  //       // html-minifier options here
+  //       collapseWhitespace: true,
+  //     }),
+  //     posthtml({
+  //       // include: '**/*.html',
+  //       template: true,
+  //       plugins: minifier({
+  //         removeComments: true,
+  //         collapseWhitespace: true,
+  //         // minifyCSS: {},
+  //       }),
+  //     }),
+  //     babel({
+  //       exclude: './node_modules/**',
+  //       babelHelpers: 'bundled',
+  //       extensions: ['.js', '.html', '.scss'],
+  //       presets: [
+  //         [
+  //           '@babel/preset-env',
+  //           {
+  //             loose: true,
+  //             corejs: 3,
+  //             useBuiltIns: 'usage',
+  //           },
+  //         ],
+  //       ],
+  //     }),
+  //     resolve({
+  //       // extensions: ['.js'],
+  //     }),
+  //     commonjs({
+  //       // include: 'node_modules/**',
+  //     }),
+  //     sizeSnapshot({}),
+  //   ],
+  // },
+
+  customBuild({
+    input: './src/platforms/shopify/conjured-referrals/betterSharing.js',
+    output: {
+      name: 'betterSharing',
+      file:
+        './packages/shopify/conjured-referrals/better-sharing-shopify-conjured-referrals.js',
+      format: 'iife',
+      globals: { window: 'window' },
+    },
+    pluginsPre: [
+      // scss({
+      //   output: false,
+      // }),
+      url(),
+    ],
+    // babelOpts: {
+    //   exclude: './node_modules/**',
+    //   babelHelpers: 'bundled',
+    //   // extensions: ['.js', '.html', '.scss'],
+    //   presets: [
+    //     [
+    //       '@babel/preset-env',
+    //       {
+    //         loose: true,
+    //         // corejs: 3,
+    //         // useBuiltIns: 'usage',
+    //       },
+    //     ],
+    //   ],
+    // },
+  }),
 ]

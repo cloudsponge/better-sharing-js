@@ -1,20 +1,17 @@
 {
-  "name": "@cloudsponge/better-sharing-kickoff-labs.js",
-  "main": "better-sharing-kickoff-labs-min.js",
+  "name": "@cloudsponge/better-sharing-shopify-conjured-referrals.js",
+  "main": "better-sharing-shopify-conjured-referrals.js",
   "files": [
     "./"
   ],
-  "version": "0.1.5",
-  "description": "Better Sharing adds an email sharing form to your KickoffLabs campaign.",
+  "version": "0.0.2",
+  "description": "Better Sharing's Contact Picker can be added to any input field on your page.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cloudsponge/better-sharing-js.git"
   },
   "author": "Graeme Rouse <graeme@cloudsponge.com>",
   "license": "MIT",
-  "dependencies": {
-    "@cloudsponge/address-book-connector.js": "^1.0.10"
-  },
   "devDependencies": {
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",

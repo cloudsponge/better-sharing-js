@@ -10,4 +10,8 @@ module.exports = {
     '^.+\\.svg?$': './test/posthtml-jest.js',
     '^.+\\.[jt]sx?$': 'babel-jest',
   },
+  // hide any of these data files from the coverage reports
+  moduleNameMapper: {
+    '\\.(css|scss|svg)$': 'identity-obj-proxy',
+  },
 }

@@ -62,7 +62,7 @@ export const success = () => {
   contacts.value = ''
 }
 export const failure = (data) => {
-  console.error('[BetterSharing] There was a problem sending the email: ', data)
+  console.error('[betterSharing] There was a problem sending the email: ', data)
   document.getElementById('status-message').innerHTML =
     '<div class="alert alert-warning alert-dismissible fade show" role="alert">We failed to send any email: ' +
     (data.xhr.responseText ||
