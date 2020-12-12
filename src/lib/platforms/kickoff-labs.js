@@ -3,11 +3,11 @@ import template from './kickoff-labs.html'
 // describes the default values for our platforms
 import { holder, archetypes } from './kickoff-labs.json'
 
-const html = (mailtoParams = {}) => {
+const html = (options = {}) => {
   return template({
     holder,
     archetypes,
-    mailtoParams,
+    options,
   })
 }
 

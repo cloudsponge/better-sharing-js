@@ -61,7 +61,8 @@
   <form action="#" accept-charset="UTF-8" method="post" data-addressBookConnector-js="true">
 
     <input type="hidden" name="owner" id="owner" value=""/>
-    <input type="hidden" name="subject" value="${_.mailtoParams.subject}"/>
+    <input type="hidden" name="subject" value="${_.options.subject}"/>
+    <input type="hidden" name="referralLink" id="referralLink" value="${_.options.referralLink}"/>
 
     <div class="col-md-12">
       <div class="input-group">
@@ -82,7 +83,7 @@
 
     <div class="col-md-12">
       <div class="input-group">
-        <textarea name="body" class="better-sharing-input form-control" readonly rows="5">${_.mailtoParams.body}</textarea>
+        <textarea name="body" class="better-sharing-input form-control" rows="3">${_.options.body}</textarea>
       </div>
     </div>
     <div class="col-md-12">

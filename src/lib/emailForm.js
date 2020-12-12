@@ -43,7 +43,7 @@ export const addEmailFormToPage = () => {
   holderElement.classList.add(...holder.classes)
 
   // finally, populate the holder with our custom html
-  holderElement.innerHTML = html(options().mailtoParams)
+  holderElement.innerHTML = html(options())
 
   // now it's time to configure the address-book-connector script
   initAddressBookConnector(options())
@@ -61,6 +61,7 @@ export const success = () => {
   // clear the contacts field
   contacts.value = ''
 }
+
 export const failure = (data) => {
   console.error('[betterSharing] There was a problem sending the email: ', data)
   document.getElementById('status-message').innerHTML =

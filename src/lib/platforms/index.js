@@ -41,14 +41,20 @@ const guessOptionsFromPage = () => {
   initArchetype(archetypes.mailtoArchetype)
   initArchetype(archetypes.inputArchetype)
 
+  options().referralLink =
+    (archetypes.inputArchetype.element &&
+      archetypes.inputArchetype.element.value) ||
+    ''
+  options().body ||= ''
+  options().subject ||= ''
+
   // parse out the mailto params for subject/body/to/from/cc/bcc, etc
-  options().mailtoParams = {}
   if (archetypes.mailtoArchetype.element) {
     const mailtoParamsArray = archetypes.mailtoArchetype.element.href
       .split(/[?&=]/)
       .slice(1)
     for (let i = 0; i < mailtoParamsArray.length; i += 2) {
-      options().mailtoParams[mailtoParamsArray[i]] = decodeURIComponent(
+      options()[mailtoParamsArray[i]] ||= decodeURIComponent(
         mailtoParamsArray[i + 1]
       )
     }

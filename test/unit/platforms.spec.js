@@ -62,22 +62,29 @@ describe('guessOptionsFromPage', () => {
 
   it('handles a missing mailto', () => {
     platform.guessOptionsFromPage()
-    expect(options().mailtoParams).toEqual({})
+    expect(options()).toEqual({
+      subject: '',
+      body: '',
+      referralLink: '',
+    })
   })
 
   it('assigns mailto properties to the options', () => {
     // set it up
-    expect(options().mailtoParams).toBe(undefined)
+    expect(options()).toEqual({})
     const subject = 'this+is+a+subject'
     const body = 'this+is+a+body'
+    const referralLink = ''
+
     document.body.innerHTML = `<a href="mailto:support@cloudsponge.com?subject=${subject}&body=${body}">`
 
     // execute it
     platform.guessOptionsFromPage()
 
     // assert!
-    expect(options().mailtoParams).toEqual({
+    expect(options()).toEqual({
       subject,
+      referralLink,
       body,
     })
   })
