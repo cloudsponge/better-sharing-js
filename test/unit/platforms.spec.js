@@ -58,6 +58,9 @@ describe('guessOptionsFromPage', () => {
   beforeEach(() => {
     document.body.innerHTML = `<div></div>`
     resetOptions()
+    const { inputArchetype } = platform.archetypes
+    inputArchetype.element = null
+    inputArchetype._initialized = false
   })
 
   it('handles a missing mailto', () => {
@@ -87,5 +90,11 @@ describe('guessOptionsFromPage', () => {
       referralLink,
       body,
     })
+  })
+
+  it('returns false it cannot validate the referralLink', () => {
+    document.body.innerHTML =
+      '<input class="kol-copy-and-paste-sharelink" value="https://kickofflabs.com">'
+    expect(platform.guessOptionsFromPage()).toEqual(false)
   })
 })

@@ -29,5 +29,6 @@
       "classes": "",
       "styles": ""
     }
-  }
+  },
+  "referralLinkValidator": "^https?:\/\/(?!kickofflabs.com)"
 }

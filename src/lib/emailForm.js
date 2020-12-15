@@ -22,8 +22,11 @@ defaults({
 })
 
 // create the form and add it to the page
-export const addEmailFormToPage = () => {
-  guessOptionsFromPage()
+export const addEmailFormToPage = (tries = 0) => {
+  if (!guessOptionsFromPage() && tries < 10) {
+    setTimeout(() => addEmailFormToPage(tries + 1), 500)
+    return
+  }
 
   let holderElement = document.querySelector(holder.selector)
   // if we didn't find the holder, then we need to create one and append it

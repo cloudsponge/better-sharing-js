@@ -11,7 +11,8 @@ const {
 
 import options from '../../src/lib/scriptOptions'
 import * as utils from '../../src/lib/window'
-import { guessOptionsFromPage, archetypes } from '../../src/lib/platforms'
+import * as platforms from '../../src/lib/platforms'
+const { archetypes } = platforms
 import addressBookConnector from '@cloudsponge/address-book-connector.js'
 
 beforeEach(() => {
@@ -39,6 +40,36 @@ describe('run', () => {
 })
 
 describe('addEmailFormToPage', () => {
+  it('queues itself if guessOptionsFromPage is not ready', () => {
+    const guessOptionsFromPageSpy = jest.spyOn(
+      platforms,
+      'guessOptionsFromPage'
+    )
+    const setTimeoutSpy = jest.spyOn(window, 'setTimeout')
+    guessOptionsFromPageSpy.mockImplementation(() => false)
+    addEmailFormToPage()
+    expect(setTimeoutSpy).toHaveBeenCalled()
+    // call the timeout function:
+    setTimeoutSpy.mock.calls[0][0]()
+    // the timeout function should execute guessOptionsFromPage and pass in the argument 1
+    expect(guessOptionsFromPageSpy.mock.calls.length).toBe(2)
+    guessOptionsFromPageSpy.mockRestore()
+  })
+
+  it('stops retrying the call after many times', () => {
+    const guessOptionsFromPageSpy = jest.spyOn(
+      platforms,
+      'guessOptionsFromPage'
+    )
+    guessOptionsFromPageSpy.mockImplementation(() => false)
+    const setTimeoutSpy = jest.spyOn(window, 'setTimeout')
+    document.body.innerHTML = `<div class="better-sharing-inline-email-form"></div>`
+    addEmailFormToPage(10)
+    expect(setTimeoutSpy).not.toHaveBeenCalled()
+    setTimeoutSpy.mockRestore()
+    guessOptionsFromPageSpy.mockRestore()
+  })
+
   it('finds the holder div', () => {
     document.body.innerHTML = `<div class="better-sharing-inline-email-form"></div>
       <div class="row">
@@ -49,12 +80,14 @@ describe('addEmailFormToPage', () => {
       /^<div class="better-sharing-inline-email-form row">/
     )
   })
+
   it('creates the holder div', () => {
     addEmailFormToPage()
     expect(document.body.innerHTML).toMatch(
       '<div class="row better-sharing-inline-email-form">'
     )
   })
+
   it('calls initAddressBookConnector', () => {
     const optionsSpy = jest.spyOn(addressBookConnector, 'setOptions')
     addEmailFormToPage()

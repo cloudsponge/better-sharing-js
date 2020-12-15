@@ -2,7 +2,7 @@ import options from '../scriptOptions'
 // loads the target platform using require so that we can run the tests as well as
 // use replacement for the build process.
 const currentPlatform = require(`./${process.env.TARGET_PLATFORM}`)
-const { holder, archetypes, html } = currentPlatform
+const { holder, archetypes, html, referralLinkValidator } = currentPlatform
 
 const initArchetype = (props) => {
   props.element = props.element || document.querySelector(props.selector)
@@ -41,12 +41,21 @@ const guessOptionsFromPage = () => {
   initArchetype(archetypes.mailtoArchetype)
   initArchetype(archetypes.inputArchetype)
 
+  options().body ||= ''
+  options().subject ||= ''
   options().referralLink =
     (archetypes.inputArchetype.element &&
       archetypes.inputArchetype.element.value) ||
     ''
-  options().body ||= ''
-  options().subject ||= ''
+
+  // validate the referralLink before
+  if (
+    referralLinkValidator &&
+    options().referralLink &&
+    !options().referralLink.match(new RegExp(referralLinkValidator))
+  ) {
+    return false
+  }
 
   // parse out the mailto params for subject/body/to/from/cc/bcc, etc
   if (archetypes.mailtoArchetype.element) {
@@ -59,6 +68,8 @@ const guessOptionsFromPage = () => {
       )
     }
   }
+
+  return true
 }
 
 export { holder, archetypes, html, initArchetype, guessOptionsFromPage }
