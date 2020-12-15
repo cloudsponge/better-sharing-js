@@ -21,7 +21,7 @@
     "lint:fix": "yarn eslint --fix \"./**/*.js\""
   },
   "dependencies": {
-    "@cloudsponge/address-book-connector.js": "^1.1.1",
+    "@cloudsponge/address-book-connector.js": "^1.1.3",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.11.0",
