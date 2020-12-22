@@ -13,12 +13,16 @@ Add the script to your page:
     <script
         src="https://unpkg.com/@cloudsponge/better-sharing-kickoff-labs.js"
         data-key="[your key from CloudSponge]"
+        data-subject="[email subject]"
+        data-body="[email body without the referral link]"
         data-sender-email="[a verified sender email address for your ESP]"
         data-default-sender-name="[name of the sender when the user's is not available]"
         data-default-reply-to-email="[email to reply to when the user's is not available]"
         data-default-reply-to-name="[name of the when the user's is not available]"
         crossorigin="anonymous">
     </script>
+
+You will customize the script to work for your own purposes by replacing the attribute values in the example above.
 
 ### Sender email
 
