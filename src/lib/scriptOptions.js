@@ -75,7 +75,7 @@ export const init = () => {
   //  check for any script with a bettersharing-* data attribute or a script that includes a better-sharing.js built file
   const thisScript =
     document.currentScript || // most browsers support currentScript, which is nice and easy
-    document.querySelector('[data-better-sharing-key]') || // IE does not so we'll look for any script with our expected data attribute
+    document.querySelector('script[data-key][src*=better-sharing], script[data-better-sharing-key]') || // if the current script is unavailable, lets look for any script matching our install instructions
     Array.from(document.querySelectorAll('script')).find((script) => {
       // failing that, we'll look for the script based on it containing any data-bettersharing-* attributes
       return (
