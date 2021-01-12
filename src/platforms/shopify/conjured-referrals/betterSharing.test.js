@@ -1,4 +1,5 @@
-import betterSharing, { isReady, whenReady, init } from './betterSharing'
+import betterSharing from './betterSharing'
+const { isReady, whenReady, init } = betterSharing
 import { addJavascript } from '../../../lib/utils'
 import svg from './icon.svg'
 jest.mock('../../../lib/utils')

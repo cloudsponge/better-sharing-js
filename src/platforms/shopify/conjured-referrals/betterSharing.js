@@ -14,14 +14,14 @@ defaults({
   tooltip: 'Pick your contacts from your address book',
 })
 
-export const isReady = () => {
+const isReady = () => {
   if (document.getElementById('conjured_advocate_share_email')) {
     return true
   }
   return false
 }
 
-export const whenReady = (executable, times = 0) => {
+const whenReady = (executable, times = 0) => {
   if (isReady()) {
     executable()
   } else if (times < 10) {
@@ -36,7 +36,7 @@ export const whenReady = (executable, times = 0) => {
 
 // 1. initialization of the cloudsponge script
 // 2. initialization of the UI
-export const init = () => {
+const init = () => {
   const { key, betterSharingKey, selector, containerClass, tooltip } = options()
   // add the cloudsponge contact picker to the page
   if (key || betterSharingKey) {
@@ -78,6 +78,10 @@ const betterSharing = (opts) => {
 
 // expose the options
 betterSharing.options = options
+// expose other functions:
+betterSharing.init = init
+betterSharing.whenReady = whenReady
+betterSharing.isReady = isReady
 
 afterUpdateOptions(betterSharing)
 

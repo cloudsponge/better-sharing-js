@@ -114,4 +114,7 @@ const options = (args = null) => {
   return currentOptions
 }
 
+// export the init function as well
+options.init = init
+
 export default options
