@@ -95,6 +95,23 @@ describe('betterSharing', () => {
       expect(addJavascript).not.toHaveBeenCalled()
     })
 
+    it('adds the javascript and inits cloudsponge when the alternate betterSharingKey is used', () => {
+      return new Promise((done) => {
+        addJavascript.mockImplementation((src, id, cb) => {
+          window.cloudsponge = {
+            init: jest.fn(),
+          }
+          cb()
+          expect(window.cloudsponge.init).toHaveBeenCalled()
+          done()
+        })
+        betterSharing.options({ betterSharingKey: 'something' })
+        init()
+        expect(addJavascript).toHaveBeenCalled()
+        addJavascript.mockRestore()
+      })
+    })
+
     it('adds the javascript and inits cloudsponge', () => {
       return new Promise((done) => {
         addJavascript.mockImplementation((src, id, cb) => {

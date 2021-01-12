@@ -37,12 +37,12 @@ export const whenReady = (executable, times = 0) => {
 // 1. initialization of the cloudsponge script
 // 2. initialization of the UI
 export const init = () => {
-  const { key, selector, containerClass, tooltip } = options()
+  const { key, betterSharingKey, selector, containerClass, tooltip } = options()
   // add the cloudsponge contact picker to the page
-  if (key) {
+  if (key || betterSharingKey) {
     // add the cloudsponge javascript
     addJavascript(
-      `https://api.cloudsponge.com/widget/${key}.js`,
+      `https://api.cloudsponge.com/widget/${key || betterSharingKey}.js`,
       'cloudsponge-script',
       () => {
         // initialize the cloudsponge object here since we may be calling this function a subsequent time
