@@ -2,7 +2,7 @@ import options from '../scriptOptions'
 // loads the target platform using require so that we can run the tests as well as
 // use replacement for the build process.
 const currentPlatform = require(`./${process.env.TARGET_PLATFORM}`)
-const { holder, archetypes, html, referralLinkValidator } = currentPlatform
+const { holder, archetypes, html, referralLinkParser, referralLinkValidator, emailShareBody, emailShareSubject } = currentPlatform
 
 const initArchetype = (props) => {
   props.element = props.element || document.querySelector(props.selector)
@@ -41,9 +41,10 @@ const guessOptionsFromPage = () => {
   initArchetype(archetypes.mailtoArchetype)
   initArchetype(archetypes.inputArchetype)
 
-  options().body ||= ''
-  options().subject ||= ''
+  options().body ||= emailShareBody && emailShareBody()
+  options().subject ||= emailShareSubject && emailShareSubject()
   options().referralLink =
+    (referralLinkParser && referralLinkParser()) ||
     (archetypes.inputArchetype.element &&
       archetypes.inputArchetype.element.value) ||
     ''
