@@ -48,25 +48,25 @@ describe('referralLinkParser', () => {
   })
 
   it('returns window.kol_lead.social_url', () => {
-    window.kol_lead = {social_url: 'the special URL'}
+    window.kol_lead = { social_url: 'the special URL' }
     expect(referralLinkParser()).toEqual('the special URL')
     delete window.kol_lead
   })
 
   it('returns builds it with window.kol_signup_url', () => {
-    window.kol_signup_url = "http://example.com"
-    window.kol_lead = {id: '1234'}
+    window.kol_signup_url = 'http://example.com'
+    window.kol_lead = { id: '1234' }
     expect(referralLinkParser()).toEqual('http://example.com?kid=1234')
     delete window.kol_signup_url
     delete window.kol_lead
   })
 
   it('returns builds it with window.kol_signup_url and __kol_analytics.user.cid', () => {
-    window.kol_signup_url = "http://example.com"
+    window.kol_signup_url = 'http://example.com'
     window.__kol_analytics = {
       user: {
-        cid: "abcd",
-      }
+        cid: 'abcd',
+      },
     }
     expect(referralLinkParser()).toEqual('http://example.com?kid=abcd')
     delete window.kol_signup_url
@@ -74,9 +74,9 @@ describe('referralLinkParser', () => {
   })
 
   it('returns cannot build it without __kol_analytics.user.cid', () => {
-    window.kol_signup_url = "http://example.com"
+    window.kol_signup_url = 'http://example.com'
     window.__kol_analytics = {
-      user: {}
+      user: {},
     }
     expect(referralLinkParser()).toBeNull()
     delete window.kol_signup_url
@@ -91,7 +91,7 @@ describe('emailShareBody', () => {
 
   it('returns the body', () => {
     window.kol_default_list_options = {
-      email_share_body: 'body of the email'
+      email_share_body: 'body of the email',
     }
     expect(emailShareBody()).toEqual('body of the email')
     delete window.kol_default_list_options
@@ -105,7 +105,7 @@ describe('emailShareSubject', () => {
 
   it('returns the subject', () => {
     window.kol_default_list_options = {
-      email_share_subject: 'subject of the email'
+      email_share_subject: 'subject of the email',
     }
     expect(emailShareSubject()).toEqual('subject of the email')
     delete window.kol_default_list_options

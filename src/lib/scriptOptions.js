@@ -74,8 +74,10 @@ export const init = () => {
   //  but can also be defeated if this code executes in a callback. so to be clever, we're going to
   //  check for any script with a bettersharing-* data attribute or a script that includes a better-sharing.js built file
   const thisScript =
-  // document.currentScript || // most browsers support currentScript, which is nice and easy but is problematic when the script is added dynamically so:
-    document.querySelector('script[data-key][src*=better-sharing], script[data-better-sharing-key]') || // if the current script is unavailable, lets look for any script matching our install instructions
+    // document.currentScript || // most browsers support currentScript, which is nice and easy but is problematic when the script is added dynamically so:
+    document.querySelector(
+      'script[data-key][src*=better-sharing], script[data-better-sharing-key]'
+    ) || // if the current script is unavailable, lets look for any script matching our install instructions
     Array.from(document.querySelectorAll('script')).find((script) => {
       // failing that, we'll look for the script based on it containing any data-bettersharing-* attributes
       return (
