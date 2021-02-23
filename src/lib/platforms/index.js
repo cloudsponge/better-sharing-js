@@ -2,7 +2,15 @@ import options from '../scriptOptions'
 // loads the target platform using require so that we can run the tests as well as
 // use replacement for the build process.
 const currentPlatform = require(`./${process.env.TARGET_PLATFORM}`)
-const { holder, archetypes, html, referralLinkParser, referralLinkValidator, emailShareBody, emailShareSubject } = currentPlatform
+const {
+  holder,
+  archetypes,
+  html,
+  referralLinkParser,
+  referralLinkValidator,
+  emailShareBody,
+  emailShareSubject,
+} = currentPlatform
 
 const initArchetype = (props) => {
   props.element = props.element || document.querySelector(props.selector)

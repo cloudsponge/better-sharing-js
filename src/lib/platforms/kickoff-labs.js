@@ -18,24 +18,44 @@ const referralLinkParser = () => {
   }
   if (window.kol_signup_url) {
     if (window.kol_lead && kol_lead.id) {
-      return kol_signup_url+'?kid='+kol_lead.id
+      return kol_signup_url + '?kid=' + kol_lead.id
     }
-    if (window.__kol_analytics && __kol_analytics.user && __kol_analytics.user.cid) {
-      return kol_signup_url+'?kid='+__kol_analytics.user.cid
+    if (
+      window.__kol_analytics &&
+      __kol_analytics.user &&
+      __kol_analytics.user.cid
+    ) {
+      return kol_signup_url + '?kid=' + __kol_analytics.user.cid
     }
   }
   return null
 }
 
 const emailShareSubject = () => {
-  return window.kol_default_list_options && kol_default_list_options.email_share_subject || ''
+  return (
+    (window.kol_default_list_options &&
+      kol_default_list_options.email_share_subject) ||
+    ''
+  )
 }
 
 const emailShareBody = () => {
-  return window.kol_default_list_options && kol_default_list_options.email_share_body || ''
+  return (
+    (window.kol_default_list_options &&
+      kol_default_list_options.email_share_body) ||
+    ''
+  )
 }
 
-export { html, holder, archetypes, referralLinkValidator, referralLinkParser, emailShareSubject, emailShareBody }
+export {
+  html,
+  holder,
+  archetypes,
+  referralLinkValidator,
+  referralLinkParser,
+  emailShareSubject,
+  emailShareBody,
+}
 
 const kickoffLabs = {
   html,
