@@ -14,7 +14,8 @@
     "dist/"
   ],
   "scripts": {
-    "ci": "rm -rf node_modules && yarn install --frozen-lockfile",
+    "ciprep": "rm -rf node_modules && ",
+    "ci": "yarn install --frozen-lockfile",
     "build": "rollup -c",
     "test": "jest --config ./jest.config.js",
     "test:coverage": "yarn test --coverage",
