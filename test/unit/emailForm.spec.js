@@ -70,6 +70,14 @@ describe('addEmailFormToPage', () => {
     guessOptionsFromPageSpy.mockRestore()
   })
 
+  it('fails gracefully without the holder div', () => {
+    document.body.innerHTML = ``
+    addEmailFormToPage()
+    expect(document.body.innerHTML).not.toMatch(
+      /^<div class="better-sharing-inline-email-form row">/
+    )
+  })
+
   it('finds the holder div', () => {
     document.body.innerHTML = `<div class="better-sharing-inline-email-form"></div>
       <div class="row">

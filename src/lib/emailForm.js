@@ -39,7 +39,9 @@ export const addEmailFormToPage = (tries = 0) => {
       archetypes.mailtoArchetype.element,
       holder.ancestorSelector
     )
-    parentClass.insertAdjacentElement('afterend', holderElement)
+    if (parentClass) {
+      parentClass.insertAdjacentElement('afterend', holderElement)
+    }
   }
 
   // kickoff labs reqires the row class to be added
