@@ -1,7 +1,7 @@
 {
   "access": "public",
   "name": "@cloudsponge/better-sharing.js",
-  "main": "dist/better-sharing.js",
+  "main": "packages/generic/better-sharing.js",
   "version": "0.1.4",
   "description": "Better Sharing adds an email sharing form to your page.",
   "repository": {
