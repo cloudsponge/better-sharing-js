@@ -10,6 +10,7 @@ import htmlMinifier from 'rollup-plugin-html-minifier'
 import minifier from 'posthtml-minifier'
 import url from '@rollup/plugin-url'
 import json from '@rollup/plugin-json'
+import styles from 'rollup-plugin-styles'
 
 const babelOptions = require('./babel.config')
 
@@ -157,9 +158,44 @@ const customBuild = (
   return newOptions
 }
 
+const shopifyConjuredReferralBuildOpts = (prod = false) => {
+  const outputFile = prod
+    ? './packages/shopify/conjured-referrals/better-sharing-shopify-conjured-referrals.js'
+    : './packages/shopify/conjured-referrals/better-sharing-shopify-conjured-referrals.debug.js'
+  return {
+    prod,
+    input: './src/platforms/shopify/conjured-referrals/betterSharing.js',
+    output: {
+      name: 'betterSharing',
+      file: outputFile,
+      format: 'iife',
+      globals: { window: 'window' },
+    },
+    pluginsPre: [url()],
+  }
+}
+
+const genericBuildOpts = (prod = false) => {
+  const outputFile = prod
+    ? './packages/generic/better-sharing.js'
+    : './packages/generic/better-sharing.debug.js'
+  const styleOptions = prod ? { minimize: true } : {}
+  return {
+    prod,
+    input: './src/platforms/generic/betterSharing.js',
+    output: {
+      name: 'betterSharing',
+      file: outputFile,
+      format: 'iife',
+      globals: { window: 'window' },
+    },
+    pluginsPre: [styles(styleOptions), url()],
+  }
+}
+
 export default [
-  targetBuild('kickoff-labs'),
-  targetBuild('kickoff-labs', { prod: true }),
+  // targetBuild('kickoff-labs'),
+  // targetBuild('kickoff-labs', { prod: true }),
   // {
   //   input: './contact-picker/index.js',
   //   output: {
@@ -211,35 +247,10 @@ export default [
   //   ],
   // },
 
-  customBuild({
-    input: './src/platforms/shopify/conjured-referrals/betterSharing.js',
-    output: {
-      name: 'betterSharing',
-      file:
-        './packages/shopify/conjured-referrals/better-sharing-shopify-conjured-referrals.js',
-      format: 'iife',
-      globals: { window: 'window' },
-    },
-    pluginsPre: [
-      // scss({
-      //   output: false,
-      // }),
-      url(),
-    ],
-    // babelOpts: {
-    //   exclude: './node_modules/**',
-    //   babelHelpers: 'bundled',
-    //   // extensions: ['.js', '.html', '.scss'],
-    //   presets: [
-    //     [
-    //       '@babel/preset-env',
-    //       {
-    //         loose: true,
-    //         // corejs: 3,
-    //         // useBuiltIns: 'usage',
-    //       },
-    //     ],
-    //   ],
-    // },
-  }),
+  // customBuild(shopifyConjuredReferralBuildOpts()),
+  // customBuild(shopifyConjuredReferralBuildOpts(true)),
+
+  // Generic build for generic/better-sharing.js
+  customBuild(genericBuildOpts()),
+  // customBuild(genericBuildOpts(true)),
 ]

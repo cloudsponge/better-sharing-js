@@ -24,16 +24,19 @@ defaults({
     name: 'subject',
     default: 'default subj',
   },
-  referralLink: window.location,
-  send: {
+  sendButton: {
     label: 'Send the Invitation',
   },
+  referralLink: window.location,
   selector: '.better-sharing-inline-email-form',
 })
 
-const betterSharing = (element = null, opts = {}) => {
+const betterSharing = (opts = {}) => {
   // apply the options
-  const renderOpts = Object.assign({css: emailFormCss}, options(), opts)
+  const renderOpts = Object.assign({ css: emailFormCss }, options(), opts)
+
+  // did they pass in an element to populate?
+  let element = opts.element
 
   // attempt to find the default element
   if (!element) {

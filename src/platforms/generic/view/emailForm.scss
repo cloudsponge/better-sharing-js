@@ -113,9 +113,21 @@ textarea.better-sharing-input {
   border-radius: .25rem;
   font-family: inherit;
   font-size: 100%;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  &:hover {
+    text-decoration: none;
+  };
 }
 
 .better-sharing-contact-button {
+  &:not([href]) {
+    color: #fff;
+  }
+  &:hover {
+    color: #fff;
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
@@ -125,4 +137,9 @@ textarea.better-sharing-input {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
+  &:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
 }
