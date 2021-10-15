@@ -2,7 +2,7 @@
   "access": "public",
   "name": "@cloudsponge/better-sharing.js",
   "main": "better-sharing.js",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Add a sharing via email for to any page with Better Sharing.",
   "repository": {
     "type": "git",
