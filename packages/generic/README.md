@@ -15,13 +15,14 @@ Add the script before the closing `</body>` tag on your page:
       data-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
       data-sender-email="support@cloudsponge.com"
       data-default-sender-name="Better Sharing"
-      data-body="This is a sample referral email. The link below will take you to my rewards page!"
-      data-referral-link="https://www.cloudsponge.com/"
       data-subject="you will like this"
+      data-body="This is a sample referral email. The link below will take you to my rewards page!"
+      data-referral-link="https://www.example.com/"
       crossorigin="anonymous">
     </script>
 
-Optionally, configure your betterSharing object with more options:
+
+<!-- Optionally, configure your betterSharing object with more options:
 
     <script>
       betterSharing({
@@ -32,7 +33,7 @@ Optionally, configure your betterSharing object with more options:
           label: "Open Address Book"
         }
       })
-    </script>
+    </script> -->
 
 ## Supported options
 
@@ -42,8 +43,10 @@ Options may be set in the `script` tag using `data-` attributes or via the call 
 | ---- | -------------- | -------- | ----------- |
 | `key` | `data-key` | Yes | Your CloudSponge key |
 | `defaultSenderName` | `data-default-sender-name` | Yes | Name of the sender when the sender's is not available |
-| `body` | `data-body` | ``
-| `senderEmail` | `data-sender-email` | - |  |
+| `senderEmail` | `data-sender-email` | - | Pass-through value to Zapier so that the sender email that matches with your sending domain can be set here. |
+| `subject` | `data-subject` | - | Pass-through value containing the email subject. Zapier will also receive a `Personal Subject` value that includes the recipient's first name, whenever possible. |
+| `body` | `data-body` | - | Pass-through data so that default body content can be set here. |
+| `referralLink` | `data-referral-link` | - | Pass-through value containing the the referral URL. |
 
 ## Configure CloudSponge & Zapier
 
