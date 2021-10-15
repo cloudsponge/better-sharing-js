@@ -194,8 +194,8 @@ const genericBuildOpts = (prod = false) => {
 }
 
 export default [
-  // targetBuild('kickoff-labs'),
-  // targetBuild('kickoff-labs', { prod: true }),
+  targetBuild('kickoff-labs'),
+  targetBuild('kickoff-labs', { prod: true }),
   // {
   //   input: './contact-picker/index.js',
   //   output: {
@@ -247,10 +247,10 @@ export default [
   //   ],
   // },
 
-  // customBuild(shopifyConjuredReferralBuildOpts()),
-  // customBuild(shopifyConjuredReferralBuildOpts(true)),
+  customBuild(shopifyConjuredReferralBuildOpts()),
+  customBuild(shopifyConjuredReferralBuildOpts(true)),
 
   // Generic build for generic/better-sharing.js
   customBuild(genericBuildOpts()),
-  // customBuild(genericBuildOpts(true)),
+  customBuild(genericBuildOpts(true)),
 ]
