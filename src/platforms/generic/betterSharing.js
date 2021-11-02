@@ -2,6 +2,7 @@
 import addressBookConnector from '../../lib/addressBookConnector'
 import options, { defaults } from '../../lib/scriptOptions'
 import emailFormTemplate from './view/emailFormTemplate.html'
+import emailFormTemplateDeep from './view/emailFormTemplateDeep.html'
 import emailFormCss from './view/emailForm.scss'
 
 defaults({
@@ -33,19 +34,20 @@ defaults({
 
 const betterSharing = (opts = {}) => {
   // apply the options
-  const renderOpts = Object.assign({ css: emailFormCss }, options(), opts)
+  opts = Object.assign({ css: emailFormCss }, options(), opts)
 
   // did they pass in an element to populate?
   let element = opts.element
 
   // attempt to find the default element
   if (!element) {
-    element = document.querySelector(options().selector)
+    element = document.querySelector(opts.selector)
   }
 
+  const template = opts.contactPickerButton.deepLinks ? emailFormTemplateDeep : emailFormTemplate
   // do something if there is an element passed in
   if (element) {
-    element.innerHTML = emailFormTemplate(renderOpts)
+    element.innerHTML = template(opts)
   }
 }
 

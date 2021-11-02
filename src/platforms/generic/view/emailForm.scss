@@ -1,3 +1,5 @@
+$responsiveBreak: 512px;
+
 .better-sharing-email-form {
   *, ::after, ::before {
     box-sizing: border-box;
@@ -37,10 +39,23 @@
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
-  @media (min-width: 768px) {
+  margin-bottom: .5rem;
+  @media (min-width: $responsiveBreak) {
     -ms-flex: 0 0 33.333333%;
     flex: 0 0 33.333333%;
     max-width: 33.333333%;
+  }
+}
+.better-sharing-col-6 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-bottom: .5rem;
+  @media (min-width: $responsiveBreak) {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
   }
 }
 .better-sharing-col-8 {
@@ -48,7 +63,7 @@
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;
-  @media (min-width: 768px) {
+  @media (min-width: $responsiveBreak) {
     -ms-flex: 0 0 66.666667%;
     flex: 0 0 66.666667%;
     max-width: 66.666667%;
@@ -131,6 +146,31 @@ textarea.better-sharing-input {
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
+
+  &[data-cloudsponge-source] {
+    // vertical alignment
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &[data-cloudsponge-source]::before {
+    background-repeat: no-repeat;
+    content: " ";
+    width: 32px;
+    height: 32px;
+    background-size: 32px 32px;
+    margin: 0 5px;
+  }
+  &[data-cloudsponge-source="gmail"]::before {
+    background-image: url('./btn_google.svg');
+  }
+  &[data-cloudsponge-source="yahoo"]::before {
+    background-image: url('./btn_yahoo.svg');
+  }
+  &[data-cloudsponge-source="outlookcom"]::before {
+    background-image: url('./btn_outlookcom.svg');
+  }
 }
 
 .better-sharing-send-button {
