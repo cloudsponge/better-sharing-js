@@ -22,18 +22,21 @@ Add the script before the closing `</body>` tag on your page:
     </script>
 
 
-<!-- Optionally, configure your betterSharing object with more options:
+Optionally, configure your betterSharing object with more options:
 
     <script>
       betterSharing({
-        cloudsponge: {
-          sources: ['gmail', 'yahoo', 'windowslive']
-        }
+        // switch to the deep links version of the plugin
         contactPickerButton: {
-          label: "Open Address Book"
+          deepLinks: true,
+          title: 'Invite people directly from your address book.',
+        },
+        cloudsponge: {
+          sources: ['gmail', 'yahoo', 'outlookcom'],
+          skipSourceMenu: true,
         }
       })
-    </script> -->
+    </script>
 
 ## Supported options
 
