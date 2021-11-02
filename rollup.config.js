@@ -10,7 +10,8 @@ import htmlMinifier from 'rollup-plugin-html-minifier'
 import minifier from 'posthtml-minifier'
 import url from '@rollup/plugin-url'
 import json from '@rollup/plugin-json'
-import styles from 'rollup-plugin-styles'
+import postcss from 'rollup-plugin-postcss'
+import postcssUrl from 'postcss-url'
 
 const babelOptions = require('./babel.config')
 
@@ -35,6 +36,18 @@ const baseBuild = {
         // we're unable to use the minifyCSS option while we're replacing strings in it
         minifyCSS: false,
       }),
+    }),
+    postcss({
+      inject: false,
+      // extract: true,
+      minimize: true,
+      plugins: [
+        postcssUrl({
+          url: "inline", // enable inline assets using base64 encoding
+          maxSize: 10, // maximum file size to inline (in kilobytes)
+          fallback: "copy", // fallback method to use if max size is exceeded
+        }),
+      ],
     }),
     babel({
       exclude: 'node_modules/**',
@@ -179,7 +192,6 @@ const genericBuildOpts = (prod = false) => {
   const outputFile = prod
     ? './packages/generic/better-sharing.js'
     : './packages/generic/better-sharing.debug.js'
-  const styleOptions = prod ? { minimize: true } : {}
   return {
     prod,
     input: './src/platforms/generic/betterSharing.js',
@@ -189,63 +201,13 @@ const genericBuildOpts = (prod = false) => {
       format: 'iife',
       globals: { window: 'window' },
     },
-    pluginsPre: [styles(styleOptions), url()],
+    pluginsPre: [url()],
   }
 }
 
 export default [
   targetBuild('kickoff-labs'),
   targetBuild('kickoff-labs', { prod: true }),
-  // {
-  //   input: './contact-picker/index.js',
-  //   output: {
-  //     name: 'contactPicker',
-  //     file: './packages/contact-picker/contact-picker.js',
-  //     format: 'iife',
-  //     globals: { window: 'window' },
-  //   },
-  //   plugins: [
-  //     scss({
-  //       output: false,
-  //     }),
-  //     url(),
-  //     htmlMinifier({
-  //       // html-minifier options here
-  //       collapseWhitespace: true,
-  //     }),
-  //     posthtml({
-  //       // include: '**/*.html',
-  //       template: true,
-  //       plugins: minifier({
-  //         removeComments: true,
-  //         collapseWhitespace: true,
-  //         // minifyCSS: {},
-  //       }),
-  //     }),
-  //     babel({
-  //       exclude: './node_modules/**',
-  //       babelHelpers: 'bundled',
-  //       extensions: ['.js', '.html', '.scss'],
-  //       presets: [
-  //         [
-  //           '@babel/preset-env',
-  //           {
-  //             loose: true,
-  //             corejs: 3,
-  //             useBuiltIns: 'usage',
-  //           },
-  //         ],
-  //       ],
-  //     }),
-  //     resolve({
-  //       // extensions: ['.js'],
-  //     }),
-  //     commonjs({
-  //       // include: 'node_modules/**',
-  //     }),
-  //     sizeSnapshot({}),
-  //   ],
-  // },
 
   customBuild(shopifyConjuredReferralBuildOpts()),
   customBuild(shopifyConjuredReferralBuildOpts(true)),
