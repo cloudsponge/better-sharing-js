@@ -1958,7 +1958,7 @@ var betterSharing = (function () {
 	  // apply the options
 	  opts = Object.assign({
 	    css: css_248z
-	  }, options(), opts); // did they pass in an element to populate?
+	  }, options(opts)); // did they pass in an element to populate?
 
 	  var element = opts.element; // attempt to find the default element
 
