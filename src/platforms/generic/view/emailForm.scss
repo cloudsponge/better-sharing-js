@@ -4,6 +4,11 @@ $responsiveBreak: 512px;
   *, ::after, ::before {
     box-sizing: border-box;
   }
+  a,
+  a:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
 }
 .better-sharing-alert {
   position: relative;
