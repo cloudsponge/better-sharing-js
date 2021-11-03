@@ -34,7 +34,7 @@ defaults({
 
 const betterSharing = (opts = {}) => {
   // apply the options
-  opts = Object.assign({ css: emailFormCss }, options(), opts)
+  opts = Object.assign({ css: emailFormCss }, options(opts))
 
   // did they pass in an element to populate?
   let element = opts.element
