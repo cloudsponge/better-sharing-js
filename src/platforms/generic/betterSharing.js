@@ -44,7 +44,9 @@ const betterSharing = (opts = {}) => {
     element = document.querySelector(opts.selector)
   }
 
-  const template = opts.contactPickerButton.deepLinks ? emailFormTemplateDeep : emailFormTemplate
+  const template = opts.contactPickerButton.deepLinks
+    ? emailFormTemplateDeep
+    : emailFormTemplate
   // do something if there is an element passed in
   if (element) {
     element.innerHTML = template(opts)

@@ -43,9 +43,9 @@ const baseBuild = {
       minimize: true,
       plugins: [
         postcssUrl({
-          url: "inline", // enable inline assets using base64 encoding
+          url: 'inline', // enable inline assets using base64 encoding
           maxSize: 10, // maximum file size to inline (in kilobytes)
-          fallback: "copy", // fallback method to use if max size is exceeded
+          fallback: 'copy', // fallback method to use if max size is exceeded
         }),
       ],
     }),
