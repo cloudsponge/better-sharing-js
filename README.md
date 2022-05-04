@@ -14,7 +14,7 @@ Add the script to your page:
 
     <script
         src="https://unpkg.com/@cloudsponge/better-sharing.js"
-        data-cloudsponge-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
+        data-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
         crossorigin="anonymous">
     </script>
 
