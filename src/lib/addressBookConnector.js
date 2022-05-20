@@ -20,7 +20,7 @@ defaults({
   },
 })
 
-const success = () => {
+export const success = (successMessage) => {
   const contacts =
     document.querySelector(
       '[data-addressBookConnector-js] .cloudsponge-contacts'
@@ -30,19 +30,20 @@ const success = () => {
   if (alertElement) {
     alertElement.innerHTML =
       '<div class="better-sharing-alert better-sharing-alert-success">' +
-      `We sent an email to ${emails}.</div>`
+      successMessage || `We sent an email to ${emails}.` +
+      '</div>'
   }
   // clear the contacts field
   contacts.value = ''
 }
 
-const failure = (data) => {
+export const failure = (data, message) => {
   console.error('[betterSharing] There was a problem sending the email: ', data)
   const alertElement = document.getElementById('better-sharing-status-message')
   if (alertElement) {
     alertElement.innerHTML =
-      '<div class="better-sharing-alert better-sharing-alert-warning">We failed to send any email: ' +
-      (data.xhr.responseText ||
+      `<div class="better-sharing-alert better-sharing-alert-warning">${message || "We failed to send any email"}: ` +
+      (data.xhr && data.xhr.responseText ||
         'This may have been a duplicate email or another unknown error occurred.') +
       '.</div>'
   }

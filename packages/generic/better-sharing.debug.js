@@ -1841,26 +1841,24 @@ var betterSharing = (function () {
 	    sources: ['gmail', 'yahoo', 'windowslive', 'aol', 'icloud', 'office365', 'outlook', 'addressbook', 'csv']
 	  }
 	});
-
-	var success = function success() {
+	var success = function success(successMessage) {
 	  var contacts = document.querySelector('[data-addressBookConnector-js] .cloudsponge-contacts') || document.createElement('input');
 	  var emails = contacts.value;
 	  var alertElement = document.getElementById('better-sharing-status-message');
 
 	  if (alertElement) {
-	    alertElement.innerHTML = '<div class="better-sharing-alert better-sharing-alert-success">' + ("We sent an email to " + emails + ".</div>");
+	    alertElement.innerHTML = '<div class="better-sharing-alert better-sharing-alert-success">' + successMessage || "We sent an email to " + emails + "." + '</div>';
 	  } // clear the contacts field
 
 
 	  contacts.value = '';
 	};
-
-	var failure = function failure(data) {
+	var failure = function failure(data, message) {
 	  console.error('[betterSharing] There was a problem sending the email: ', data);
 	  var alertElement = document.getElementById('better-sharing-status-message');
 
 	  if (alertElement) {
-	    alertElement.innerHTML = '<div class="better-sharing-alert better-sharing-alert-warning">We failed to send any email: ' + (data.xhr.responseText || 'This may have been a duplicate email or another unknown error occurred.') + '.</div>';
+	    alertElement.innerHTML = "<div class=\"better-sharing-alert better-sharing-alert-warning\">" + (message || "We failed to send any email") + ": " + (data.xhr && data.xhr.responseText || 'This may have been a duplicate email or another unknown error occurred.') + '.</div>';
 	  }
 	};
 
@@ -1886,6 +1884,10 @@ var betterSharing = (function () {
 	};
 
 	afterUpdateOptions(initAddressBookConnector);
+
+	var buttonOnlyTemplate = (function (_) {
+	  return "<div class=\"better-sharing-email-form\"><style>" + _.css + "</style><div class=\"better-sharing-row\"><div class=\"better-sharing-col-12\" id=\"better-sharing-status-message\"></div></div><a href=\"#\" class=\"cloudsponge-launch better-sharing-button better-sharing-contact-button\" title=\"" + _.contactPickerButton.label + "\">" + _.contactPickerButton.label + "</a></div>";
+	});
 
 	var defineProperty$3 = objectDefineProperty.f;
 
@@ -1925,6 +1927,8 @@ var betterSharing = (function () {
 	    label: 'Add from Contacts',
 	    title: 'Invite people directly from your address book.'
 	  },
+	  // suppresses the email form fields
+	  displayEmailForm: false,
 	  toField: {
 	    name: 'to',
 	    placeholder: 'To: (enter your friend&#39;s email)',
@@ -1966,7 +1970,32 @@ var betterSharing = (function () {
 	    element = document.querySelector(opts.selector);
 	  }
 
-	  var template = opts.contactPickerButton.deepLinks ? emailFormTemplateDeep : emailFormTemplate; // do something if there is an element passed in
+	  if (!opts.displayEmailForm) {
+	    // trigger automatically at the end of the contact selection
+	    options({
+	      cloudsponge: {
+	        afterSubmitContacts: function afterSubmitContacts(contacts, _, owner) {
+	          var data = {
+	            owner: owner,
+	            contacts: contacts
+	          };
+	          window.cloudsponge.trigger(data).then(function () {
+	            console.log('[address-book-connector.js] Successfully triggered cloudsponge with data:', data);
+	            success(contacts.length + " contacts were successfully shared."); // invoke a callback on the addressBookConnector object
+
+	            options.success && options.success();
+	          }).catch(function (error) {
+	            console.error('[address-book-connector.js] Failed to trigger cloudsponge:', error);
+	            failure(error, "Something went wrong while attempting to share your address book"); // invoke a callback on the addressBookConnector object
+
+	            options.failure && options.failure(error);
+	          });
+	        }
+	      }
+	    });
+	  }
+
+	  var template = !opts.displayEmailForm ? buttonOnlyTemplate : opts.contactPickerButton.deepLinks ? emailFormTemplateDeep : emailFormTemplate; // do something if there is an element passed in
 
 	  if (element) {
 	    element.innerHTML = template(opts);
