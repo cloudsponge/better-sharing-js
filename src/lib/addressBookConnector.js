@@ -30,7 +30,7 @@ export const success = (successMessage) => {
   if (alertElement) {
     alertElement.innerHTML =
       '<div class="better-sharing-alert better-sharing-alert-success">' +
-      successMessage || `We sent an email to ${emails}.` +
+      (successMessage || `We sent an email to ${emails}.`) +
       '</div>'
   }
   // clear the contacts field

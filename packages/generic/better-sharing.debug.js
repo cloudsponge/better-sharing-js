@@ -1847,7 +1847,7 @@ var betterSharing = (function () {
 	  var alertElement = document.getElementById('better-sharing-status-message');
 
 	  if (alertElement) {
-	    alertElement.innerHTML = '<div class="better-sharing-alert better-sharing-alert-success">' + successMessage || "We sent an email to " + emails + "." + '</div>';
+	    alertElement.innerHTML = '<div class="better-sharing-alert better-sharing-alert-success">' + (successMessage || "We sent an email to " + emails + ".") + '</div>';
 	  } // clear the contacts field
 
 
@@ -1980,12 +1980,12 @@ var betterSharing = (function () {
 	            contacts: contacts
 	          };
 	          window.cloudsponge.trigger(data).then(function () {
-	            console.log('[address-book-connector.js] Successfully triggered cloudsponge with data:', data);
+	            console.log('[betterSharing.js] Successfully triggered cloudsponge with data:', data);
 	            success(contacts.length + " contacts were successfully shared."); // invoke a callback on the addressBookConnector object
 
 	            options.success && options.success();
 	          }).catch(function (error) {
-	            console.error('[address-book-connector.js] Failed to trigger cloudsponge:', error);
+	            console.error('[betterSharing.js] Failed to trigger cloudsponge:', error);
 	            failure(error, "Something went wrong while attempting to share your address book"); // invoke a callback on the addressBookConnector object
 
 	            options.failure && options.failure(error);

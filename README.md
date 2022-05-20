@@ -28,6 +28,34 @@ Optionally, configure your betterSharing object with more options:
       });
     </script>
 
+### Variations
+
+The default display is a simple button. To display the email sending form, add the following option to your script:
+
+    data-display-email-form="true"
+
+For example:
+
+    <script
+        src="https://unpkg.com/@cloudsponge/better-sharing.js"
+        data-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
+        data-display-email-form="true"
+        crossorigin="anonymous">
+    </script>
+
+
+### Customizations
+
+You can customize the text on the contact picker button by specifying the betterSharing options like below:
+
+    <script>
+      betterSharing({
+        contactPickerButton: {
+          label: 'Connect your Address Book',
+        },
+      });
+    </script>
+
 ## Configure CloudSponge & Zapier
 
 * Add the [HTML code to your page](https://www.loom.com/share/60ded4674a3c4d2da0436357cbb21ce2)
