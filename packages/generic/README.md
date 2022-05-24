@@ -1,58 +1,62 @@
 # better-sharing.js
 
+[![Build Status](https://api.travis-ci.org/cloudsponge/better-sharing-js.svg?branch=main)](https://travis-ci.org/cloudsponge/better-sharing-js)
+
 Better Sharing adds a better way to send email referrals by creating a form that you can add to any page.
 
 ## Installation
 
-Add this HTML content to the page to specify where the form should be added:
+Add this HTML content to the page to specify where the form should be added, otherwise, we'll pick a place for you:
 
-    <div class="better-sharing-inline-email-form">Better Sharing will load here. 🔧 Made with ❤️ by CloudSponge.</div>
+    <div class="better-sharing">The Better Sharing inline email form will load here.</div>
 
-Add the script before the closing `</body>` tag on your page:
+Add the script to your page:
 
     <script
-      src="https://unpkg.com/@cloudsponge/better-sharing.js"
-      data-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
-      data-sender-email="support@cloudsponge.com"
-      data-default-sender-name="Better Sharing"
-      data-subject="you will like this"
-      data-body="This is a sample referral email. The link below will take you to my rewards page!"
-      data-referral-link="https://www.example.com/"
-      crossorigin="anonymous">
+        src="https://unpkg.com/@cloudsponge/better-sharing.js"
+        data-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
+        crossorigin="anonymous">
     </script>
-
 
 Optionally, configure your betterSharing object with more options:
 
     <script>
       betterSharing({
-        // switch to the deep links version of the plugin
-        contactPickerButton: {
-          deepLinks: true,
-          title: 'Invite people directly from your address book.',
-        },
         cloudsponge: {
-          sources: ['gmail', 'yahoo', 'outlookcom'],
-          skipSourceMenu: true,
+          sources: ['gmail', 'yahoo', 'windowslive']
         }
-      })
+      });
     </script>
 
-## Supported options
+### Variations
 
-Options may be set in the `script` tag using `data-` attributes or via the call to `betterSharing({})`.
+The default display is a simple button. To display the email sending form, add the following option to your script:
 
-| Name | Attribute name | Required | Description |
-| ---- | -------------- | -------- | ----------- |
-| `key` | `data-key` | Yes | Your CloudSponge key |
-| `defaultSenderName` | `data-default-sender-name` | Yes | Name of the sender when the sender's is not available |
-| `senderEmail` | `data-sender-email` | - | Pass-through value to Zapier so that the sender email that matches with your sending domain can be set here. |
-| `subject` | `data-subject` | - | Pass-through value containing the email subject. Zapier will also receive a `Personal Subject` value that includes the recipient's first name, whenever possible. |
-| `body` | `data-body` | - | Pass-through data so that default body content can be set here. |
-| `referralLink` | `data-referral-link` | - | Pass-through value containing the the referral URL. |
+    data-display-email-form="true"
+
+For example:
+
+    <script
+        src="https://unpkg.com/@cloudsponge/better-sharing.js"
+        data-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
+        data-display-email-form="true"
+        crossorigin="anonymous">
+    </script>
+
+
+### Customizations
+
+You can customize the text on the contact picker button by specifying the betterSharing options like below:
+
+    <script>
+      betterSharing({
+        contactPickerButton: {
+          label: 'Connect your Address Book',
+        },
+      });
+    </script>
 
 ## Configure CloudSponge & Zapier
-
 
 * Add the [HTML code to your page](https://www.loom.com/share/60ded4674a3c4d2da0436357cbb21ce2)
     * Add the `<div>` to your page where you want the form to appear.

@@ -6,7 +6,7 @@ Better Sharing adds a better way to send email referrals by creating a form that
 
 Add this HTML content to the page to specify where the form should be added, otherwise, we'll pick a place for you:
 
-    <div class="better-sharing-inline-email-form">Better Sharing will load here. 🔧 Made with ❤️ by CloudSponge.</div>
+    <div class="better-sharing">Better Sharing will load here. 🔧 Made with ❤️ by CloudSponge.</div>
 
 Add the script to your page:
 

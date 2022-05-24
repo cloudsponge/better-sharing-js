@@ -1,7 +1,7 @@
 {
   "holder": {
-    "selector": ".better-sharing-inline-email-form",
-    "classes": ["row", "better-sharing-inline-email-form"],
+    "selector": ".better-sharing",
+    "classes": ["row", "better-sharing"],
     "ancestorSelector": ".row"
   },
   "archetypes": {

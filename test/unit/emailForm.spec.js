@@ -63,7 +63,7 @@ describe('addEmailFormToPage', () => {
     )
     guessOptionsFromPageSpy.mockImplementation(() => false)
     const setTimeoutSpy = jest.spyOn(window, 'setTimeout')
-    document.body.innerHTML = `<div class="better-sharing-inline-email-form"></div>`
+    document.body.innerHTML = `<div class="better-sharing"></div>`
     addEmailFormToPage(10)
     expect(setTimeoutSpy).not.toHaveBeenCalled()
     setTimeoutSpy.mockRestore()
@@ -74,26 +74,22 @@ describe('addEmailFormToPage', () => {
     document.body.innerHTML = ``
     addEmailFormToPage()
     expect(document.body.innerHTML).not.toMatch(
-      /^<div class="better-sharing-inline-email-form row">/
+      /^<div class="better-sharing row">/
     )
   })
 
   it('finds the holder div', () => {
-    document.body.innerHTML = `<div class="better-sharing-inline-email-form"></div>
+    document.body.innerHTML = `<div class="better-sharing"></div>
       <div class="row">
         <a href="mailto:someone@example.com"></a>
       </div>`
     addEmailFormToPage()
-    expect(document.body.innerHTML).toMatch(
-      /^<div class="better-sharing-inline-email-form row">/
-    )
+    expect(document.body.innerHTML).toMatch(/^<div class="better-sharing row">/)
   })
 
   it('creates the holder div', () => {
     addEmailFormToPage()
-    expect(document.body.innerHTML).toMatch(
-      '<div class="row better-sharing-inline-email-form">'
-    )
+    expect(document.body.innerHTML).toMatch('<div class="row better-sharing">')
   })
 
   it('calls initAddressBookConnector', () => {
