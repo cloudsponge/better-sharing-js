@@ -42,8 +42,10 @@ export const failure = (data, message) => {
   const alertElement = document.getElementById('better-sharing-status-message')
   if (alertElement) {
     alertElement.innerHTML =
-      `<div class="better-sharing-alert better-sharing-alert-warning">${message || "We failed to send any email"}: ` +
-      (data.xhr && data.xhr.responseText ||
+      `<div class="better-sharing-alert better-sharing-alert-warning">${
+        message || 'We failed to send any email'
+      }: ` +
+      ((data.xhr && data.xhr.responseText) ||
         'This may have been a duplicate email or another unknown error occurred.') +
       '.</div>'
   }

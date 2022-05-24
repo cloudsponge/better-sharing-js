@@ -1,5 +1,8 @@
 // import the address-book-connector object from the package
-import addressBookConnector, { success, failure } from '../../lib/addressBookConnector'
+import addressBookConnector, {
+  success,
+  failure,
+} from '../../lib/addressBookConnector'
 import options, { defaults } from '../../lib/scriptOptions'
 import buttonOnlyTemplate from './view/buttonOnlyTemplate.html'
 import emailFormTemplate from './view/emailFormTemplate.html'
@@ -52,32 +55,36 @@ const betterSharing = (opts = {}) => {
     // trigger automatically at the end of the contact selection
     options({
       cloudsponge: {
-        afterSubmitContacts: function(contacts, _, owner) {
+        afterSubmitContacts: function (contacts, _, owner) {
           const data = {
             owner,
             contacts,
           }
-          window.cloudsponge.trigger(data)
+          window.cloudsponge
+            .trigger(data)
             .then(() => {
               console.log(
                 '[betterSharing.js] Successfully triggered cloudsponge with data:',
                 data
-              );
+              )
               success(`${contacts.length} contacts were successfully shared.`)
               // invoke a callback on the addressBookConnector object
-              options.success && options.success();
+              options.success && options.success()
             })
-            .catch(error => {
+            .catch((error) => {
               console.error(
                 '[betterSharing.js] Failed to trigger cloudsponge:',
                 error
-              );
-              failure(error, "Something went wrong while attempting to share your address book")
+              )
+              failure(
+                error,
+                'Something went wrong while attempting to share your address book'
+              )
               // invoke a callback on the addressBookConnector object
-              options.failure && options.failure(error);
-            });
-        }
-      }
+              options.failure && options.failure(error)
+            })
+        },
+      },
     })
   }
 
