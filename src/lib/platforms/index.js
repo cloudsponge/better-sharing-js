@@ -1,32 +1,86 @@
-import { objToCss } from '../window'
+import options from '../scriptOptions'
+// loads the target platform using require so that we can run the tests as well as
+// use replacement for the build process.
+const currentPlatform = require(`./${process.env.TARGET_PLATFORM}`)
+const {
+  holder,
+  archetypes,
+  html,
+  referralLinkParser,
+  referralLinkValidator,
+  emailShareBody,
+  emailShareSubject,
+} = currentPlatform
 
-import currentPlatform from './process.env.TARGET_PLATFORM'
-
-const platforms = {
-  currentPlatform,
-}
-
-export const initArchetype = (props) => {
-  props.element = props.element || document.querySelector(props.selector);
+const initArchetype = (props) => {
+  props.element = props.element || document.querySelector(props.selector)
 
   // don't re-init or continue if no element was found
   if (!props.element || props._initialized) {
     return
   }
 
-  // copy the classnames, excluding the current selector's
-  if (props.selector.startsWith('.')) {
-    var excludedClassName = props.selector.replace(/^\./, '');
-    props.classes = props.element.className.split(excludedClassName).join('').trim();
-  } else {
-    props.classes = props.element.className;
-  }
+  // applies the relevant styles inline:
+  const computedStyles = window.getComputedStyle(props.element)
+  const newStyles = `
+    height:   ${computedStyles.height};
+    padding:  ${computedStyles.padding};
+    margin:   ${computedStyles.margin};
+    border:   ${computedStyles.border};
+    border-radius: ${computedStyles.borderRadius};
+    color:    ${computedStyles.color};
+    background-color: ${computedStyles.backgroundColor};
+    font:     ${computedStyles.font};
+    --margin-left: ${computedStyles.marginLeft};
+    --width: ${computedStyles.width};
+    --height: ${computedStyles.height};
+  `
 
-  // copies the styles
-  props.styles = objToCss(props.styles) + (props.element.getAttribute('style') || '');
+  props.styles = newStyles
 
   // finished init!
-  props._initialized = true;
+  props._initialized = true
 }
 
-export default platforms
+// guess the button and other styles from elements that may exist on the page
+const guessOptionsFromPage = () => {
+  // look for a copy-paste link to grab the colors off of:
+  initArchetype(archetypes.buttonArchetype)
+  initArchetype(archetypes.mailtoArchetype)
+  initArchetype(archetypes.inputArchetype)
+
+  options().body ||= emailShareBody && emailShareBody()
+  options().subject ||= emailShareSubject && emailShareSubject()
+  options().referralLink =
+    (referralLinkParser && referralLinkParser()) ||
+    (archetypes.inputArchetype.element &&
+      archetypes.inputArchetype.element.value) ||
+    ''
+
+  // validate the referralLink before
+  if (
+    referralLinkValidator &&
+    options().referralLink &&
+    !options().referralLink.match(new RegExp(referralLinkValidator))
+  ) {
+    return false
+  }
+
+  // parse out the mailto params for subject/body/to/from/cc/bcc, etc
+  if (archetypes.mailtoArchetype.element) {
+    const mailtoParamsArray = archetypes.mailtoArchetype.element.href
+      .split(/[?&=]/)
+      .slice(1)
+    for (let i = 0; i < mailtoParamsArray.length; i += 2) {
+      options()[mailtoParamsArray[i]] ||= decodeURIComponent(
+        mailtoParamsArray[i + 1]
+      )
+    }
+  }
+
+  return true
+}
+
+export { holder, archetypes, html, initArchetype, guessOptionsFromPage }
+
+export default currentPlatform

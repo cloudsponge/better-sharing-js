@@ -1,0 +1,190 @@
+$responsiveBreak: 512px;
+
+.better-sharing {
+  *, ::after, ::before {
+    box-sizing: border-box;
+  }
+  a,
+  a:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
+}
+.better-sharing-alert {
+  position: relative;
+  padding: .75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+}
+.better-sharing-alert-warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+.better-sharing-alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+/* Clear floats after the columns */
+.better-sharing-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-bottom: .5rem;
+}
+
+.better-sharing-col-4 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-bottom: .5rem;
+  @media (min-width: $responsiveBreak) {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+}
+.better-sharing-col-6 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-bottom: .5rem;
+  @media (min-width: $responsiveBreak) {
+    -ms-flex: 0 0 50%;
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+.better-sharing-col-8 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  @media (min-width: $responsiveBreak) {
+    -ms-flex: 0 0 66.666667%;
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+  }
+}
+.better-sharing-col-12 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.better-sharing-input {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: inherit;
+  display: block;
+  width: 100%;
+  height: calc(1.5em + .75rem + 2px);
+  padding: .375rem .75rem;
+//  font-size: 1rem;
+//  font-weight: 400;
+//  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+
+textarea.better-sharing-input {
+  overflow: auto;
+  resize: vertical;
+  height: auto;
+}
+
+.better-sharing-input-help {
+  display: block;
+  margin-top: .25rem;
+  font-size: 75%;
+}
+
+.better-sharing-button {
+  width: 100%;
+  cursor: pointer;
+  display: inline-block;
+//  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: .375rem .75rem;
+//  font-size: 1rem;
+//  line-height: 1.5;
+  border-radius: .25rem;
+  font-family: inherit;
+  font-size: 100%;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  &:hover {
+    text-decoration: none;
+  };
+}
+
+.better-sharing-contact-button {
+  &:not([href]) {
+    color: #fff;
+  }
+  &:hover {
+    color: #fff;
+    background-color: #5a6268;
+    border-color: #545b62;
+  }
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+
+  &[data-cloudsponge-source] {
+    // vertical alignment
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &[data-cloudsponge-source]::before {
+    background-repeat: no-repeat;
+    content: " ";
+    width: 32px;
+    height: 32px;
+    background-size: 32px 32px;
+    margin: 0 5px;
+  }
+  &[data-cloudsponge-source="gmail"]::before {
+    background-image: url('./btn_google.svg');
+  }
+  &[data-cloudsponge-source="yahoo"]::before {
+    background-image: url('./btn_yahoo.svg');
+  }
+  &[data-cloudsponge-source="outlookcom"]::before {
+    background-image: url('./btn_outlookcom.svg');
+  }
+}
+
+.better-sharing-send-button {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  &:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+}

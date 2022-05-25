@@ -1,0 +1,34 @@
+{
+  "holder": {
+    "selector": ".better-sharing",
+    "classes": ["row", "better-sharing"],
+    "ancestorSelector": ".row"
+  },
+  "archetypes": {
+    "buttonArchetype": {
+      "selector": "button.kol-copy-and-paste-icon",
+      "element": null,
+      "classes": "",
+      "styles": ""
+    },
+
+    "iconArchetype": {
+      "styles": "display: inline-block;"
+    },
+
+    "inputArchetype": {
+      "selector": "input.kol-copy-and-paste-sharelink",
+      "element": null,
+      "classes": "",
+      "styles": ""
+    },
+
+    "mailtoArchetype": {
+      "selector": "a[href*=mailto]",
+      "element": null,
+      "classes": "",
+      "styles": ""
+    }
+  },
+  "referralLinkValidator": "^https?:\/\/(?!kickofflabs.com)"
+}

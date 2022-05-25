@@ -1,0 +1,64 @@
+<!--
+  Our template begins with the styles that need to be applied
+ -->
+<!-- 
+// the idea here is to inherit certain styles from elements that are present on the page already.
+// by default, our form will fill the width of the page.
+// inherited properties are:
+// input: font-size, colors, padding, margins
+-->
+<div class="better-sharing-email-form">
+
+  <style>${_.css}</style>
+
+  <div class="better-sharing-row">
+    <div class="better-sharing-col-12" id="better-sharing-status-message"></div>
+  </div>
+
+  <form action="#" accept-charset="UTF-8" method="post" data-addressBookConnector-js="true">
+    <input type="hidden" name="owner" id="owner" value=""/>
+    <input type="hidden" name="subject" value="${_.subject.default}"/>
+    <input type="hidden" name="referralLink" id="referralLink" value="${_.referralLink}"/>
+    <input type="hidden" name="body" id="body" value="${_.body}"/>
+
+    <div class="better-sharing-row">
+      <div class="better-sharing-col-8">
+        <input
+            type="text"
+            name="${_.toField.name}"
+            class="cloudsponge-contacts better-sharing-input"
+            placeholder="${_.toField.placeholder}"
+            required="required"
+            title="To:"
+            aria-describedby="#better-sharing-email-help" />
+        <div id="better-sharing-email-help" class="better-sharing-input-help">${_.toField.hint}</div>
+      </div>
+
+      <div class="better-sharing-col-4">
+        <a href="#" class="cloudsponge-launch better-sharing-button better-sharing-contact-button" title="${_.contactPickerButton.label}">
+          ${_.contactPickerButton.label}
+        </a>
+      </div>
+    </div>
+
+    <div class="better-sharing-row">
+      <div class="better-sharing-col-8">
+        <textarea
+          title="Custom Message"
+          name="${_.messageField.name}"
+          class="better-sharing-input"
+          rows="3"
+          placeholder="${_.messageField.placeholder}">${_.messageField.default}</textarea>
+      </div>
+    </div>
+
+    <div class="better-sharing-row">
+      <div class="better-sharing-col-4">
+        <button class="better-sharing-button better-sharing-send-button" title="${_.sendButton.label}" type="submit">
+          ${_.sendButton.label}
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>

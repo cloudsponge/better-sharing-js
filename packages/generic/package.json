@@ -1,0 +1,19 @@
+{
+  "access": "public",
+  "name": "@cloudsponge/better-sharing.js",
+  "main": "better-sharing.js",
+  "version": "0.1.13",
+  "description": "Add a sharing via email for to any page with Better Sharing.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudsponge/better-sharing-js.git"
+  },
+  "author": "Graeme Rouse <graeme@cloudsponge.com>",
+  "license": "MIT",
+  "files": [
+    "./"
+  ],
+  "dependencies": {
+    "@cloudsponge/address-book-connector.js": "^1.1.4"
+  }
+}
