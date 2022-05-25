@@ -36,7 +36,7 @@ defaults({
     label: 'Send the Invitation',
   },
   referralLink: window.location,
-  selector: '.better-sharing-inline-email-form',
+  selector: '.better-sharing',
 })
 
 const betterSharing = (opts = {}) => {
