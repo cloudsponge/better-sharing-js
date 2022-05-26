@@ -1923,7 +1923,6 @@ var betterSharing = (function () {
 
 	defaults({
 	  contactPickerButton: {
-	    // deepLinks: true,
 	    label: 'Add from Contacts',
 	    title: 'Invite people directly from your address book.'
 	  },
@@ -1947,11 +1946,7 @@ var betterSharing = (function () {
 	    label: 'Send the Invitation'
 	  },
 	  referralLink: window.location,
-	  selector: '.better-sharing' // cloudsponge: {
-	  //   sources: ['gmail', 'yahoo', 'outlook'],
-	  //   skipSourceMenu: true,
-	  // },
-
+	  selector: '.better-sharing'
 	});
 
 	var betterSharing = function betterSharing(opts) {
@@ -1976,38 +1971,7 @@ var betterSharing = (function () {
 	      onUpdateContacts: function onUpdateContacts() {
 	        var form = document.querySelector('.better-sharing-default > form[data-addressBookConnector-js]');
 	        form && form.dispatchEvent(new Event('submit'));
-	      } // cloudsponge: {
-	      //   // afterSubmitContacts: function (contacts, _, owner) {
-	      //   //   const data = {
-	      //   //     owner,
-	      //   //     contacts,
-	      //   //   }
-	      //   //   window.cloudsponge
-	      //   //     .trigger(data)
-	      //   //     .then(() => {
-	      //   //       console.log(
-	      //   //         '[betterSharing.js] Successfully triggered cloudsponge with data:',
-	      //   //         data
-	      //   //       )
-	      //   //       success(`${contacts.length} contacts were successfully shared.`)
-	      //   //       // invoke a callback on the addressBookConnector object
-	      //   //       options.success && options.success()
-	      //   //     })
-	      //   //     .catch((error) => {
-	      //   //       console.error(
-	      //   //         '[betterSharing.js] Failed to trigger cloudsponge:',
-	      //   //         error
-	      //   //       )
-	      //   //       failure(
-	      //   //         error,
-	      //   //         'Something went wrong while attempting to share your address book'
-	      //   //       )
-	      //   //       // invoke a callback on the addressBookConnector object
-	      //   //       options.failure && options.failure(error)
-	      //   //     })
-	      //   // },
-	      // },
-
+	      }
 	    });
 	  }
 
