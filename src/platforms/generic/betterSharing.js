@@ -53,37 +53,12 @@ const betterSharing = (opts = {}) => {
 
   if (!opts.displayEmailForm) {
     // trigger automatically at the end of the contact selection
-    options({
-      cloudsponge: {
-        afterSubmitContacts: function (contacts, _, owner) {
-          const data = {
-            owner,
-            contacts,
-          }
-          window.cloudsponge
-            .trigger(data)
-            .then(() => {
-              console.log(
-                '[betterSharing.js] Successfully triggered cloudsponge with data:',
-                data
-              )
-              success(`${contacts.length} contacts were successfully shared.`)
-              // invoke a callback on the addressBookConnector object
-              options.success && options.success()
-            })
-            .catch((error) => {
-              console.error(
-                '[betterSharing.js] Failed to trigger cloudsponge:',
-                error
-              )
-              failure(
-                error,
-                'Something went wrong while attempting to share your address book'
-              )
-              // invoke a callback on the addressBookConnector object
-              options.failure && options.failure(error)
-            })
-        },
+    addressBookConnector.setOptions({
+      onUpdateContacts: () => {
+        const form = document.querySelector(
+          '.better-sharing-default > form[data-addressBookConnector-js]'
+        )
+        form && form.dispatchEvent(new Event('submit'))
       },
     })
   }
