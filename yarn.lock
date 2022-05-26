@@ -847,10 +847,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cloudsponge/address-book-connector.js@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@cloudsponge/address-book-connector.js/-/address-book-connector.js-1.1.4.tgz#508e5302fca47ea500d9ae6e1d83d1523a8f0719"
-  integrity sha512-Aw3iVLPiTCd2wMOpLOwgnAYxClhVW10zUeonoTaZoiQqo6X8z5CY68piAS+gmuaLP5q5l9SHlW5oACCw9hHJ4A==
+"@cloudsponge/address-book-connector.js@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@cloudsponge/address-book-connector.js/-/address-book-connector.js-1.2.0.tgz#314058d0db52fe0db38943d1e41599ad185a38c1"
+  integrity sha512-RuO/xgTcBVBlZ5HjUNDCh4GrmlA8g5Y3OnnZ/6USMwpQWVxyFrtUEpy7zDF+yXhd+QHbrPEnznW/jvoCYcI+0g==
   dependencies:
     serialize-javascript ">=2.1.1"
 
@@ -2298,12 +2298,7 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001125, caniuse-lite@^1.0.30001219:
-  version "1.0.30001341"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001341.tgz"
-  integrity sha512-2SodVrFFtvGENGCv0ChVJIDQ0KPaS1cg7/qtfMaICgeMolDdo/Z2OD32F0Aq9yl6F4YFwGPBS5AaPqNYiW4PoA==
-
-caniuse-lite@^1.0.30001274:
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001125, caniuse-lite@^1.0.30001219, caniuse-lite@^1.0.30001274:
   version "1.0.30001341"
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001341.tgz"
   integrity sha512-2SodVrFFtvGENGCv0ChVJIDQ0KPaS1cg7/qtfMaICgeMolDdo/Z2OD32F0Aq9yl6F4YFwGPBS5AaPqNYiW4PoA==

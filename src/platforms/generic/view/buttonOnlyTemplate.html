@@ -6,13 +6,17 @@
 // by default, our form will fill the width of the page.
 // inherited properties are:
 -->
-<div class="better-sharing-email-form">
+<div class="better-sharing-default">
   <style>${_.css}</style>
   <div class="better-sharing-row">
     <div class="better-sharing-col-12" id="better-sharing-status-message"></div>
   </div>
 
-  <a href="#" class="cloudsponge-launch better-sharing-button better-sharing-contact-button" title="${_.contactPickerButton.label}">
-    ${_.contactPickerButton.label}
-  </a>
+  <form action="#" accept-charset="UTF-8" method="post" data-addressBookConnector-js="true">
+    <input type="hidden" name="owner" id="owner" value=""/>
+    <input type="hidden" name="${_.toField.name}" value="" class="cloudsponge-contacts better-sharing-input" />
+    <a href="#" class="cloudsponge-launch better-sharing-button better-sharing-contact-button" title="${_.contactPickerButton.label}">
+      ${_.contactPickerButton.label}
+    </a>
+  </form>
 </div>
