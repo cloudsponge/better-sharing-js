@@ -1,8 +1,4 @@
-import {
-  addJavascript,
-  hijackFn,
-  parseQuery,
-} from '../../src/lib/utils'
+import { addJavascript, hijackFn, parseQuery } from '../../src/lib/utils'
 
 describe('addJavascript', () => {
   it('adds a script to the page', () => {
@@ -112,12 +108,21 @@ describe('parseQuery', () => {
     expect(parseQuery('')).toEqual({})
   })
   it('gets string values', () => {
-    expect(parseQuery('hi=there&you=kind+ser')).toEqual({hi: 'there', you: 'kind+ser'})
+    expect(parseQuery('hi=there&you=kind+ser')).toEqual({
+      hi: 'there',
+      you: 'kind+ser',
+    })
   })
   it('gets number values', () => {
-    expect(parseQuery('one=1&twoAndAHalf=2.5')).toEqual({one: '1', twoAndAHalf: '2.5'})
+    expect(parseQuery('one=1&twoAndAHalf=2.5')).toEqual({
+      one: '1',
+      twoAndAHalf: '2.5',
+    })
   })
   it('ignores before the ?', () => {
-    expect(parseQuery('mailto?one=1&twoAndAHalf=2.5')).toEqual({one: '1', twoAndAHalf: '2.5'})
+    expect(parseQuery('mailto?one=1&twoAndAHalf=2.5')).toEqual({
+      one: '1',
+      twoAndAHalf: '2.5',
+    })
   })
 })
