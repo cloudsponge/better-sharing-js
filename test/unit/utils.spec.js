@@ -1,4 +1,8 @@
-import { addJavascript } from '../../src/lib/utils'
+import {
+  addJavascript,
+  hijackFn,
+  parseQuery,
+} from '../../src/lib/utils'
 
 describe('addJavascript', () => {
   it('adds a script to the page', () => {
@@ -89,5 +93,31 @@ describe('addJavascript', () => {
       .mockImplementation(() => [])
     addJavascript('http://localhost/src.js')
     expect(getElementsByTagNameSpy).toHaveBeenCalled()
+  })
+})
+
+describe('hijackFn', () => {
+  it('replaces the implementation', () => {
+    const globalSpy = jest.spyOn(window, 'open').mockImplementation(() => {})
+    const cb = () => {
+      window.open()
+    }
+    hijackFn(window, 'open', cb)
+    expect(globalSpy).not.toHaveBeenCalled()
+  })
+})
+
+describe('parseQuery', () => {
+  it('returns empty', () => {
+    expect(parseQuery('')).toEqual({})
+  })
+  it('gets string values', () => {
+    expect(parseQuery('hi=there&you=kind+ser')).toEqual({hi: 'there', you: 'kind+ser'})
+  })
+  it('gets number values', () => {
+    expect(parseQuery('one=1&twoAndAHalf=2.5')).toEqual({one: '1', twoAndAHalf: '2.5'})
+  })
+  it('ignores before the ?', () => {
+    expect(parseQuery('mailto?one=1&twoAndAHalf=2.5')).toEqual({one: '1', twoAndAHalf: '2.5'})
   })
 })

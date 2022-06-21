@@ -66,9 +66,6 @@ export const parseQuery = (query) => {
 }
 
 const mergeNextQueryPair = (query, obj) => {
-  if (!query) {
-    return null
-  }
   const nextNameVal = divString(query, '=')
   const name = decodeURIComponent(nextNameVal[0])
 
