@@ -51,8 +51,7 @@ export const hijackFn = (obj, fn, cb, impl) => {
   try {
     obj[fn] = impl
     cb()
-  }
-  finally {
+  } finally {
     obj[fn] = orig
   }
 }

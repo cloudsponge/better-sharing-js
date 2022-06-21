@@ -47,7 +47,7 @@ export const success = (successMessage) => {
     options().afterSuccess && options().afterSuccess()
   } catch (e) {
     // empty response here
-    console.error("Error in afterSuccess callback: ", e)
+    console.error('Error in afterSuccess callback: ', e)
   }
 }
 

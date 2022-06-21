@@ -68,7 +68,11 @@ const betterSharing = (opts = {}) => {
 
   if (opts.mailto) {
     if (element) {
-      const href = (element.href && element.href.startsWith('mailto:') && element.href) || (element.dataset.href && element.dataset.href.startsWith('mailto:') && element.dataset.href)
+      const href =
+        (element.href && element.href.startsWith('mailto:') && element.href) ||
+        (element.dataset.href &&
+          element.dataset.href.startsWith('mailto:') &&
+          element.dataset.href)
       if (href) {
         // infer the message and subject fields from the mailto destination
         const mailtoParams = parseQuery(href)
@@ -100,8 +104,10 @@ const betterSharing = (opts = {}) => {
                   element.dispatchEvent(e)
                 }
                 // hack to make it so that the call to window.open fails
-                opts.mailto == 'delayNoMailto' ? hijackFn(window, 'open', completeClick) : completeClick()
-              }
+                opts.mailto == 'delayNoMailto'
+                  ? hijackFn(window, 'open', completeClick)
+                  : completeClick()
+              },
             })
           }
 
