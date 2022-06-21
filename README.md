@@ -25,6 +25,14 @@ Then paste the following:
   </script>
 ```
 
+### Conjured Referrals
+
+Our [Conjured Referrals](https://conjured.co/) integration supports this platform on Shopify. Check out the [Better Sharing for Conjured here](https://www.npmjs.com/package/@cloudsponge/better-sharing-shopify-conjured-referrals.js).
+
+### KickoffLabs
+
+[KOL's integration](https://kickofflabs.com/) can be found at the [Better Sharing for KickoffLabs project here](https://www.npmjs.com/package/@cloudsponge/better-sharing-kickoff-labs.js).
+
 ### HTML
 
 Better Sharing can be used on any platform that supports custom HTML and Javascript.
