@@ -6,6 +6,29 @@ Better Sharing adds a better way to send email referrals by creating a form that
 
 ## Installation
 
+### UpViral
+
+UpViral's sharing page includes a `mailto` link for advocates to share their referral code via email.
+You can replace the action of this link so that in launches the Contact Picker instead.
+
+In your campaign's "Advanced Settings" find the "Social Share Page Footer codes" and click the "Edit" button.
+Then paste the following: 
+```
+  <script
+    src="https://unpkg.com/@cloudsponge/better-sharing.js"
+    data-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
+    data-mailto="delayNoMailto"
+    data-selector='[data-href^="mailto:"]'
+    data-senderEmail="support@cloudsponge.com"
+    data-defaultSenderName="Better Sharing"
+    crossorigin="anonymous">
+  </script>
+```
+
+### HTML
+
+Better Sharing can be used on any platform that supports custom HTML and Javascript.
+
 Add this HTML content to the page to specify where the form should be added, otherwise, we'll pick a place for you:
 
     <div class="better-sharing">The Better Sharing inline email form will load here.</div>
@@ -42,7 +65,6 @@ For example:
         data-display-email-form="true"
         crossorigin="anonymous">
     </script>
-
 
 ### Customizations
 

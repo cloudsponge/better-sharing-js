@@ -20,6 +20,13 @@ defaults({
   },
 })
 
+export const clearAlert = () => {
+  const alertElement = document.getElementById('better-sharing-status-message')
+  if (alertElement) {
+    alertElement.innerHTML = ''
+  }
+}
+
 export const success = (successMessage) => {
   const contacts =
     document.querySelector(
@@ -32,9 +39,16 @@ export const success = (successMessage) => {
       '<div class="better-sharing-alert better-sharing-alert-success">' +
       (successMessage || `We sent an email to ${emails}.`) +
       '</div>'
+    options().autoClear && setTimeout(clearAlert, 5000)
   }
   // clear the contacts field
   contacts.value = ''
+  try {
+    options().afterSuccess && options().afterSuccess()
+  } catch (e) {
+    // empty response here
+    console.error("Error in afterSuccess callback: ", e)
+  }
 }
 
 export const failure = (data, message) => {
@@ -48,6 +62,7 @@ export const failure = (data, message) => {
       ((data.xhr && data.xhr.responseText) ||
         'This may have been a duplicate email or another unknown error occurred.') +
       '.</div>'
+    options().autoClear && setTimeout(clearAlert, 5000)
   }
 }
 

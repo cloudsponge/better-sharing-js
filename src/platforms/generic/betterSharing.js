@@ -4,10 +4,12 @@ import addressBookConnector, {
   failure,
 } from '../../lib/addressBookConnector'
 import options, { defaults } from '../../lib/scriptOptions'
+import templateMailto from './view/templateMailto.html'
 import buttonOnlyTemplate from './view/buttonOnlyTemplate.html'
 import emailFormTemplate from './view/emailFormTemplate.html'
 import emailFormTemplateDeep from './view/emailFormTemplateDeep.html'
 import emailFormCss from './view/emailForm.scss'
+import { parseQuery, hijackFn } from '../../lib/utils'
 
 defaults({
   contactPickerButton: {
@@ -37,6 +39,7 @@ defaults({
   },
   referralLink: window.location,
   selector: '.better-sharing',
+  // mailto: true | 'delay' | 'delayNoMailto',
 })
 
 const betterSharing = (opts = {}) => {
@@ -61,6 +64,53 @@ const betterSharing = (opts = {}) => {
         form && form.dispatchEvent(new Event('submit'))
       },
     })
+  }
+
+  if (opts.mailto) {
+    if (element) {
+      const href = (element.href && element.href.startsWith('mailto:') && element.href) || (element.dataset.href && element.dataset.href.startsWith('mailto:') && element.dataset.href)
+      if (href) {
+        // infer the message and subject fields from the mailto destination
+        const mailtoParams = parseQuery(href)
+        if (mailtoParams.subject) {
+          opts.subject = mailtoParams.subject
+        }
+        if (mailtoParams.body) {
+          opts.body = mailtoParams.body
+        }
+        opts.autoClear = true
+        options(opts)
+      }
+      element.insertAdjacentHTML('afterend', templateMailto(opts))
+
+      element.addEventListener('click', (e) => {
+        if (e._executingDelay) {
+          return
+        }
+        if (window.cloudsponge) {
+          // we always don't launch the link
+          e.preventDefault()
+          // optionally we stop the propagation if there's another thing happening
+          if (opts.mailto.toString().startsWith('delay')) {
+            e.stopPropagation()
+            options({
+              afterSuccess: () => {
+                const completeClick = () => {
+                  e._executingDelay = true
+                  element.dispatchEvent(e)
+                }
+                // hack to make it so that the call to window.open fails
+                opts.mailto == 'delayNoMailto' ? hijackFn(window, 'open', completeClick) : completeClick()
+              }
+            })
+          }
+
+          // contact picker is GO
+          cloudsponge.launch()
+        }
+      })
+    }
+    return
   }
 
   const template = !opts.displayEmailForm
