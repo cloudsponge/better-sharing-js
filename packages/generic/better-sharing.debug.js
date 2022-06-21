@@ -1924,7 +1924,7 @@ var betterSharing = (function () {
 	    options().afterSuccess && options().afterSuccess();
 	  } catch (e) {
 	    // empty response here
-	    console.error("Error in afterSuccess callback: ", e);
+	    console.error('Error in afterSuccess callback: ', e);
 	  }
 	};
 	var failure = function failure(data, message) {
@@ -2118,10 +2118,6 @@ var betterSharing = (function () {
 	};
 
 	var mergeNextQueryPair = function mergeNextQueryPair(query, obj) {
-	  if (!query) {
-	    return null;
-	  }
-
 	  var nextNameVal = divString(query, '=');
 	  var name = decodeURIComponent(nextNameVal[0]);
 	  var valAndRemainder = divString(nextNameVal[1], '&');
@@ -2176,8 +2172,7 @@ var betterSharing = (function () {
 	    label: 'Send the Invitation'
 	  },
 	  referralLink: window.location,
-	  selector: '.better-sharing' // insertionStrategy: 'replace' | 'append',
-	  // mailto: true | {stop: false, prevent: false, delay: false},
+	  selector: '.better-sharing' // mailto: true | 'delay' | 'delayNoMailto',
 
 	});
 
