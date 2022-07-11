@@ -12,7 +12,7 @@ UpViral's sharing page includes a `mailto` link for advocates to share their ref
 You can replace the action of this link so that in launches the Contact Picker instead.
 
 In your campaign's "Advanced Settings" find the "Social Share Page Footer codes" and click the "Edit" button.
-Then paste the following: 
+Then paste the following (making sure to replace your own CloudSponge Key in the value of `data-key` attributes): 
 ```
   <script
     src="https://unpkg.com/@cloudsponge/better-sharing.js"
@@ -24,6 +24,25 @@ Then paste the following:
     crossorigin="anonymous">
   </script>
 ```
+
+### Prefinery
+
+You can override the `mailto:` link functionality of your [Prefinery](https://prefinery.com) campaign.
+
+Edit your Prefinery.com Referral Page. Click the HTML view so you can edit the code on the page. Add the following script at the bottom of the page, after the `{{page.networks}}` section. Make sure to replace your own CloudSponge Key in the value of `data-key` attributes.
+
+```
+  <script
+    src="https://unpkg.com/@cloudsponge/better-sharing.js"
+    data-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
+    data-mailto="delayNoMailto"
+    data-selector='[href^="mailto:"]'
+    data-senderEmail="support@cloudsponge.com"
+    data-defaultSenderName="Better Sharing"
+    crossorigin="anonymous">
+  </script>
+```
+
 
 ### Conjured Referrals
 
