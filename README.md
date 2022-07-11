@@ -25,6 +25,8 @@ Then paste the following (making sure to replace your own CloudSponge Key in the
   </script>
 ```
 
+Next, you'll [connect Zapier with your CloudSponge account](https://www.cloudsponge.com/integrations/zapier/) so that it can trigger an action when someone submits the Contact Picker.
+
 ### Prefinery
 
 You can override the `mailto:` link functionality of your [Prefinery](https://prefinery.com) campaign.
@@ -42,6 +44,8 @@ Edit your Prefinery.com Referral Page. Click the HTML view so you can edit the c
     crossorigin="anonymous">
   </script>
 ```
+
+Next, you'll [connect Zapier with your CloudSponge account](https://www.cloudsponge.com/integrations/zapier/) so that it can trigger an action when someone submits the Contact Picker.
 
 
 ### Conjured Referrals
