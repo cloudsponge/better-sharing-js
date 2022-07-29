@@ -43,6 +43,7 @@ Edit your Prefinery.com Referral Page. Click the HTML view so you can edit the c
     data-defaultSenderName="Better Sharing"
     crossorigin="anonymous">
   </script>
+  <div style="height:500px"></div>
 ```
 
 Next, you'll [connect Zapier with your CloudSponge account](https://www.cloudsponge.com/integrations/zapier/) so that it can trigger an action when someone submits the Contact Picker.
