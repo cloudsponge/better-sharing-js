@@ -127,6 +127,8 @@ const betterSharing = (opts = {}) => {
   // do something if there is an element passed in
   if (element) {
     element.innerHTML = template(opts)
+    // initialize the addressBookConnectoer after we add the HTML on the page
+    addressBookConnector.initialize()
   }
 }
 
