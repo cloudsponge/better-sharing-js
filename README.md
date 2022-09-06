@@ -16,11 +16,9 @@ Then paste the following (making sure to replace your own CloudSponge Key in the
 ```
   <script
     src="https://unpkg.com/@cloudsponge/better-sharing.js"
-    data-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
+    data-key="YOUR_KEY_FROM_CLOUDSPONGE"
     data-mailto="delayNoMailto"
     data-selector='[data-href^="mailto:"]'
-    data-senderEmail="support@cloudsponge.com"
-    data-defaultSenderName="Better Sharing"
     crossorigin="anonymous">
   </script>
 ```
@@ -36,11 +34,9 @@ Edit your Prefinery.com Referral Page. Click the HTML view so you can edit the c
 ```
   <script
     src="https://unpkg.com/@cloudsponge/better-sharing.js"
-    data-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
+    data-key="YOUR_KEY_FROM_CLOUDSPONGE"
     data-mailto="delayNoMailto"
     data-selector='[href^="mailto:"]'
-    data-senderEmail="support@cloudsponge.com"
-    data-defaultSenderName="Better Sharing"
     crossorigin="anonymous">
   </script>
   <div style="height:500px"></div>
