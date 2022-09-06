@@ -1907,13 +1907,13 @@ var betterSharing = (function () {
 	    alertElement.innerHTML = '';
 	  }
 	};
-	var success = function success(successMessage) {
+	var success = function success(data) {
 	  var contacts = document.querySelector('[data-addressBookConnector-js] .cloudsponge-contacts') || document.createElement('input');
 	  var emails = contacts.value;
 	  var alertElement = document.getElementById('better-sharing-status-message');
 
 	  if (alertElement) {
-	    alertElement.innerHTML = '<div class="better-sharing-alert better-sharing-alert-success">' + (successMessage || "We sent an email to " + emails + ".") + '</div>';
+	    alertElement.innerHTML = '<div class="better-sharing-alert better-sharing-alert-success">' + ("We sent an email to " + emails + ".") + '</div>';
 	    options().autoClear && setTimeout(clearAlert, 5000);
 	  } // clear the contacts field
 
@@ -1927,12 +1927,12 @@ var betterSharing = (function () {
 	    console.error('Error in afterSuccess callback: ', e);
 	  }
 	};
-	var failure = function failure(data, message) {
+	var failure = function failure(error, data) {
 	  console.error('[betterSharing] There was a problem sending the email: ', data);
 	  var alertElement = document.getElementById('better-sharing-status-message');
 
 	  if (alertElement) {
-	    alertElement.innerHTML = "<div class=\"better-sharing-alert better-sharing-alert-warning\">" + (message || 'We failed to send any email') + ": " + (data.xhr && data.xhr.responseText || 'This may have been a duplicate email or another unknown error occurred.') + '.</div>';
+	    alertElement.innerHTML = '<div class="better-sharing-alert better-sharing-alert-warning">We failed to send any email: ' + (data.xhr && data.xhr.responseText || 'This may have been a duplicate email or another unknown error occurred.') + '.</div>';
 	    options().autoClear && setTimeout(clearAlert, 5000);
 	  }
 	};
