@@ -6,7 +6,6 @@ import strip from '@rollup/plugin-strip'
 import { uglify } from 'rollup-plugin-uglify'
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
 import posthtml from 'rollup-plugin-posthtml-template'
-import htmlMinifier from 'rollup-plugin-html-minifier'
 import minifier from 'posthtml-minifier'
 import url from '@rollup/plugin-url'
 import json from '@rollup/plugin-json'
@@ -23,10 +22,6 @@ const baseBuild = {
   },
   plugins: [
     json(),
-    htmlMinifier({
-      // html-minifier options here
-      collapseWhitespace: true,
-    }),
     posthtml({
       // include: '**/*.html',
       template: true,
