@@ -32,17 +32,26 @@ export const success = (data) => {
     document.querySelector(
       '[data-addressBookConnector-js] .cloudsponge-contacts'
     ) || document.createElement('input')
-  const emails = contacts.value
-  const alertElement = document.getElementById('better-sharing-status-message')
-  if (alertElement) {
-    alertElement.innerHTML =
-      '<div class="better-sharing-alert better-sharing-alert-success">' +
-      `We sent an email to ${emails}.` +
-      '</div>'
-    options().autoClear && setTimeout(clearAlert, 5000)
+
+  // alert message only if this action is connected to Zapier
+  if (!options().sendMailto) {
+    const emails = contacts.value
+    const alertElement = document.getElementById('better-sharing-status-message')
+    if (alertElement) {
+      alertElement.innerHTML =
+        '<div class="better-sharing-alert better-sharing-alert-success">' +
+        `We sent an email to ${emails}.` +
+        '</div>'
+      options().autoClear && setTimeout(clearAlert, 5000)
+    }
   }
   // clear the contacts field
   contacts.value = ''
+  // clear the message
+  const customMessage = document.querySelector('[data-addressBookConnector-js] [name=customMessage]')
+  if (customMessage) {
+    customMessage.value = ''
+  }
   try {
     options().afterSuccess && options().afterSuccess()
   } catch (e) {
