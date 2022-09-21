@@ -1,0 +1,53 @@
+<div id="better-sharing-modal" class="better-sharing-modal">
+  <style>
+    /* The Modal (background) */
+    .better-sharing-modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .better-sharing-modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    /* The Close Button */
+    .better-sharing-modal-close {
+        color: #aaaaaa;
+        float: right;
+    }
+
+    .better-sharing-modal-close:hover,
+    .better-sharing-modal-close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    .better-sharing-modal-h1 {
+      line-height: 28px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+  </style>
+
+  <div class="better-sharing-modal-content">
+    <div class="better-sharing-modal-h1">
+      ${_.modal.title}
+      <span class="better-sharing-modal-close">&times;</span>
+    </div>
+    <include src="src/platforms/generic/view/emailFormTemplate.html"></include>
+  </div>
+</div>

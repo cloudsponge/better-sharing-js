@@ -15,6 +15,8 @@
   <form action="#" accept-charset="UTF-8" method="post" data-addressBookConnector-js="true">
     <input type="hidden" name="owner" id="owner" value=""/>
     <input type="hidden" name="${_.toField.name}" value="" class="cloudsponge-contacts better-sharing-input" />
+    <input type="hidden" name="subject" value="${_.subject.default || _.subject || ''}"/>
+    <input type="hidden" name="body" id="body" value="${_.body.default || _.body || ''}"/>
     <a href="#" class="cloudsponge-launch better-sharing-button better-sharing-contact-button" title="${_.contactPickerButton.label}">
       ${_.contactPickerButton.label}
     </a>

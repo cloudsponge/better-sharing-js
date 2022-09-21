@@ -17,9 +17,9 @@
 
   <form action="#" accept-charset="UTF-8" method="post" data-addressBookConnector-js="true">
     <input type="hidden" name="owner" id="owner" value=""/>
-    <input type="hidden" name="subject" value="${_.subject.default}"/>
-    <input type="hidden" name="referralLink" id="referralLink" value="${_.referralLink}"/>
-    <input type="hidden" name="body" id="body" value="${_.body}"/>
+    <input type="hidden" name="subject" value="${_.subject.default || _.subject || ''}"/>
+    <input type="hidden" name="referralLink" id="referralLink" value="${_.referralLink || ''}"/>
+    <input type="hidden" name="body" id="body" value="${_.body.default || _.body || ''}"/>
 
     <div class="better-sharing-row">
       <div class="better-sharing-col-8">
@@ -27,16 +27,16 @@
             type="text"
             name="${_.toField.name}"
             class="cloudsponge-contacts better-sharing-input"
-            placeholder="${_.toField.placeholder}"
+            placeholder="${_.toField.placeholder || ''}"
             required="required"
             title="To:"
             aria-describedby="#better-sharing-email-help" />
-        <div id="better-sharing-email-help" class="better-sharing-input-help">${_.toField.hint}</div>
+        <div id="better-sharing-email-help" class="better-sharing-input-help">${_.toField.hint || ''}</div>
       </div>
 
       <div class="better-sharing-col-4">
-        <a href="#" class="cloudsponge-launch better-sharing-button better-sharing-contact-button" title="${_.contactPickerButton.label}">
-          ${_.contactPickerButton.label}
+        <a href="#" class="cloudsponge-launch better-sharing-button better-sharing-contact-button" title="${_.contactPickerButton.label || ''}">
+          ${_.contactPickerButton.label || ''}
         </a>
       </div>
     </div>
@@ -48,14 +48,14 @@
           name="${_.messageField.name}"
           class="better-sharing-input"
           rows="3"
-          placeholder="${_.messageField.placeholder}">${_.messageField.default}</textarea>
+          placeholder="${_.messageField.placeholder || ''}">${_.messageField.default || ''}</textarea>
       </div>
     </div>
 
     <div class="better-sharing-row">
       <div class="better-sharing-col-4">
-        <button class="better-sharing-button better-sharing-send-button" title="${_.sendButton.label}" type="submit">
-          ${_.sendButton.label}
+        <button class="better-sharing-button better-sharing-send-button" title="${_.sendButton.label || 'Send'}" type="submit">
+          ${_.sendButton.label || 'Send'}
         </button>
       </div>
     </div>

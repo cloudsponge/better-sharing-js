@@ -34,7 +34,7 @@ export const success = (data) => {
     ) || document.createElement('input')
 
   // alert message only if this action is connected to Zapier
-  if (!options().sendMailto) {
+  if (options().sendVia != 'mailto') {
     const emails = contacts.value
     const alertElement = document.getElementById('better-sharing-status-message')
     if (alertElement) {

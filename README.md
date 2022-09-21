@@ -17,8 +17,9 @@ Then paste the following (making sure to replace your own CloudSponge Key in the
   <script
     src="https://unpkg.com/@cloudsponge/better-sharing.js"
     data-key="YOUR_KEY_FROM_CLOUDSPONGE"
-    data-mailto="delayNoMailto"
     data-selector='[data-href^="mailto:"]'
+    data-view="modal"
+    data-send-via="mailto"
     crossorigin="anonymous">
   </script>
 ```
@@ -35,8 +36,9 @@ Edit your Prefinery.com Referral Page. Click the HTML view so you can edit the c
   <script
     src="https://unpkg.com/@cloudsponge/better-sharing.js"
     data-key="YOUR_KEY_FROM_CLOUDSPONGE"
-    data-mailto="delayNoMailto"
     data-selector='[href^="mailto:"]'
+    data-view="modal"
+    data-send-via="mailto"
     crossorigin="anonymous">
   </script>
   <div style="height:500px"></div>
@@ -79,18 +81,25 @@ Optionally, configure your betterSharing object with more options:
       });
     </script>
 
-### Variations
+
+## Options
+
+### Different Views
 
 The default display is a simple button. To display the email sending form, add the following option to your script:
 
-    data-display-email-form="true"
+    data-view="inline"
+
+To display the email sending form as a modal, launched from a button, use
+
+    data-view="modal"
 
 For example:
 
     <script
         src="https://unpkg.com/@cloudsponge/better-sharing.js"
         data-key="[YOUR_KEY_FROM_CLOUDSPONGE]"
-        data-display-email-form="true"
+        data-view="false"
         crossorigin="anonymous">
     </script>
 
@@ -105,6 +114,29 @@ You can customize the text on the contact picker button by specifying the better
         },
       });
     </script>
+
+### Sending the Emails
+
+After the user completes the Better-Sharing form, they expect one or more emails will be sent. There are a few different ways this can happen. Read
+
+#### Platform Emails
+
+If your platform supports a custom integration with Better Sharing, then they most likely have taken care of this for you.
+
+#### Mailto Emails
+
+This option opens the browser's default email client with the data from the Better Sharing form. The user will only need to review the email and click send in their email client.
+
+Set the option `{sendVia: 'mailto'}`.
+
+This is not our recommended method, but it is the easiest to implement. To maximize the engagement of your customers' emails and the respect for their goodwill, connect with Zapier.
+
+
+#### Zapier Emails
+
+Set the option `{sendVia: 'zapier'}`. Then read the next section for steps on how to configure Zapier with CloudSponge
+and get it sending highly personalized emails directly to your customers' referrals.
+
 
 ## Configure CloudSponge & Zapier
 

@@ -8,6 +8,7 @@ import templateMailto from './view/templateMailto.html'
 import buttonOnlyTemplate from './view/buttonOnlyTemplate.html'
 import emailFormTemplate from './view/emailFormTemplate.html'
 import emailFormTemplateDeep from './view/emailFormTemplateDeep.html'
+import modalEmailFormTemplate from './view/modalEmailFormTemplate.html'
 import emailFormCss from './view/emailForm.scss'
 import { parseQuery, hijackFn } from '../../lib/utils'
 
@@ -17,7 +18,7 @@ defaults({
     title: 'Invite people directly from your address book.',
   },
   // suppresses the email form fields
-  displayEmailForm: false,
+  // displayEmailForm: false,
   toField: {
     name: 'to',
     placeholder: 'To: (enter your friend&#39;s email)',
@@ -40,7 +41,17 @@ defaults({
   referralLink: window.location,
   selector: '.better-sharing',
   // mailto: true | 'delay' | 'delayNoMailto',
+  modal: {
+    title: "Share via Email",
+  }
 })
+
+const closeModal = () => {
+  document.getElementById('better-sharing-modal').style.display = "none"
+}
+const openModal = () => {
+  document.getElementById('better-sharing-modal').style.display = "block"
+}
 
 const betterSharing = (opts = {}) => {
   // apply the options
@@ -54,7 +65,28 @@ const betterSharing = (opts = {}) => {
     element = document.querySelector(opts.selector)
   }
 
-  if (!opts.displayEmailForm) {
+  // if the selected element happens to be a mailto: pull the options from it
+  if (element) {
+    const href =
+      (element.href && element.href.startsWith('mailto:') && element.href) ||
+      (element.dataset.href &&
+        element.dataset.href.startsWith('mailto:') &&
+        element.dataset.href)
+    if (href) {
+      // infer the message and subject fields from the mailto destination
+      const mailtoParams = parseQuery(href)
+      if (mailtoParams.subject) {
+        opts.subject.default = mailtoParams.subject
+      }
+      if (mailtoParams.body) {
+        opts.body = mailtoParams.body
+      }
+      options(opts)
+    }
+  }
+
+  // this option removes the email for and triggers the form action from the Contact Picker
+  if (!opts.view || opts.view == 'false') {
     // trigger automatically at the end of the contact selection
     addressBookConnector.setOptions({
       onUpdateContacts: () => {
@@ -66,25 +98,9 @@ const betterSharing = (opts = {}) => {
     })
   }
 
+  // TODO: remove the 'mailto' option, it is overridden by the sendVia="mailto" option
   if (opts.mailto) {
     if (element) {
-      const href =
-        (element.href && element.href.startsWith('mailto:') && element.href) ||
-        (element.dataset.href &&
-          element.dataset.href.startsWith('mailto:') &&
-          element.dataset.href)
-      if (href) {
-        // infer the message and subject fields from the mailto destination
-        const mailtoParams = parseQuery(href)
-        if (mailtoParams.subject) {
-          opts.subject = mailtoParams.subject
-        }
-        if (mailtoParams.body) {
-          opts.body = mailtoParams.body
-        }
-        opts.autoClear = true
-        options(opts)
-      }
       element.insertAdjacentHTML('afterend', templateMailto(opts))
 
       element.addEventListener('click', (e) => {
@@ -119,17 +135,41 @@ const betterSharing = (opts = {}) => {
     return
   }
 
-  const template = !opts.displayEmailForm
-    ? buttonOnlyTemplate
-    : opts.contactPickerButton.deepLinks
-    ? emailFormTemplateDeep
-    : emailFormTemplate
   // do something if there is an element passed in
-  if (element) {
+  if (opts.view == 'modal') {
+    // add the modal to the page
+    document.body.insertAdjacentHTML("beforeend", modalEmailFormTemplate(opts))
+    // selected element launches the modal
+    if (element) {
+      element.addEventListener('click', (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        // launch the modal!
+        openModal()
+        if (opts.sendVia == 'mailto') {
+          options({afterSuccess: closeModal})
+        } else {
+          // we're not closing the modal, so dismiss the alert automatically
+          options({autoClear: true})
+        }
+      })
+      // click the modal x or outside the modal closes the modal:
+      document.getElementsByClassName('better-sharing-modal-close').forEach((closeButton) => {
+        closeButton.addEventListener('click', closeModal)
+      })
+    }
+  } else if (element) {
+    // get the appropriate html template
+    const template = (!opts.view || opts.view == 'false')
+      ? buttonOnlyTemplate
+      : opts.contactPickerButton.deepLinks
+      ? emailFormTemplateDeep
+      : emailFormTemplate
+
     element.innerHTML = template(opts)
-    // initialize the addressBookConnectoer after we add the HTML on the page
-    addressBookConnector.initialize()
   }
+  // initialize the addressBookConnectoer after we added the HTML on the page
+  addressBookConnector.initialize()
 }
 
 // allow the options to be assigned this way

@@ -6,6 +6,7 @@ import strip from '@rollup/plugin-strip'
 import { uglify } from 'rollup-plugin-uglify'
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
 import posthtml from 'rollup-plugin-posthtml-template'
+import htmlinclude from 'posthtml-include'
 import minifier from 'posthtml-minifier'
 import url from '@rollup/plugin-url'
 import json from '@rollup/plugin-json'
@@ -25,12 +26,15 @@ const baseBuild = {
     posthtml({
       // include: '**/*.html',
       template: true,
-      plugins: minifier({
-        removeComments: true,
-        collapseWhitespace: true,
-        // we're unable to use the minifyCSS option while we're replacing strings in it
-        minifyCSS: false,
-      }),
+      plugins: [
+        htmlinclude(),
+        minifier({
+          removeComments: true,
+          collapseWhitespace: true,
+          // we're unable to use the minifyCSS option while we're replacing strings in it
+          minifyCSS: false,
+        }),
+      ]
     }),
     postcss({
       inject: false,
