@@ -42,15 +42,15 @@ defaults({
   selector: '.better-sharing',
   // mailto: true | 'delay' | 'delayNoMailto',
   modal: {
-    title: "Share via Email",
-  }
+    title: 'Share via Email',
+  },
 })
 
 const closeModal = () => {
-  document.getElementById('better-sharing-modal').style.display = "none"
+  document.getElementById('better-sharing-modal').style.display = 'none'
 }
 const openModal = () => {
-  document.getElementById('better-sharing-modal').style.display = "block"
+  document.getElementById('better-sharing-modal').style.display = 'block'
 }
 
 const betterSharing = (opts = {}) => {
@@ -138,7 +138,7 @@ const betterSharing = (opts = {}) => {
   // do something if there is an element passed in
   if (opts.view == 'modal') {
     // add the modal to the page
-    document.body.insertAdjacentHTML("beforeend", modalEmailFormTemplate(opts))
+    document.body.insertAdjacentHTML('beforeend', modalEmailFormTemplate(opts))
     // selected element launches the modal
     if (element) {
       element.addEventListener('click', (e) => {
@@ -147,24 +147,27 @@ const betterSharing = (opts = {}) => {
         // launch the modal!
         openModal()
         if (opts.sendVia == 'mailto') {
-          options({afterSuccess: closeModal})
+          options({ afterSuccess: closeModal })
         } else {
           // we're not closing the modal, so dismiss the alert automatically
-          options({autoClear: true})
+          options({ autoClear: true })
         }
       })
       // click the modal x or outside the modal closes the modal:
-      document.getElementsByClassName('better-sharing-modal-close').forEach((closeButton) => {
-        closeButton.addEventListener('click', closeModal)
-      })
+      document
+        .getElementsByClassName('better-sharing-modal-close')
+        .forEach((closeButton) => {
+          closeButton.addEventListener('click', closeModal)
+        })
     }
   } else if (element) {
     // get the appropriate html template
-    const template = (!opts.view || opts.view == 'false')
-      ? buttonOnlyTemplate
-      : opts.contactPickerButton.deepLinks
-      ? emailFormTemplateDeep
-      : emailFormTemplate
+    const template =
+      !opts.view || opts.view == 'false'
+        ? buttonOnlyTemplate
+        : opts.contactPickerButton.deepLinks
+        ? emailFormTemplateDeep
+        : emailFormTemplate
 
     element.innerHTML = template(opts)
   }

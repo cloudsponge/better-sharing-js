@@ -36,7 +36,9 @@ export const success = (data) => {
   // alert message only if this action is connected to Zapier
   if (options().sendVia != 'mailto') {
     const emails = contacts.value
-    const alertElement = document.getElementById('better-sharing-status-message')
+    const alertElement = document.getElementById(
+      'better-sharing-status-message'
+    )
     if (alertElement) {
       alertElement.innerHTML =
         '<div class="better-sharing-alert better-sharing-alert-success">' +
@@ -48,7 +50,9 @@ export const success = (data) => {
   // clear the contacts field
   contacts.value = ''
   // clear the message
-  const customMessage = document.querySelector('[data-addressBookConnector-js] [name=customMessage]')
+  const customMessage = document.querySelector(
+    '[data-addressBookConnector-js] [name=customMessage]'
+  )
   if (customMessage) {
     customMessage.value = ''
   }

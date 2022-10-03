@@ -34,7 +34,7 @@ const baseBuild = {
           // we're unable to use the minifyCSS option while we're replacing strings in it
           minifyCSS: false,
         }),
-      ]
+      ],
     }),
     postcss({
       inject: false,
