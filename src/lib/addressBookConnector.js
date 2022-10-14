@@ -85,6 +85,7 @@ const emailOpts = (opts) => {
     'defaultSenderName',
     'defaultReplyToEmail',
     'defaultReplyToName',
+    'sendVia',
   ]
   let emailOpts = {}
   emailOptionNames.forEach((keyName) => {
