@@ -178,6 +178,11 @@ const betterSharing = (opts = {}) => {
   }
   // initialize the addressBookConnectoer after we added the HTML on the page
   addressBookConnector.initialize()
+  // if (options().bindEvent)
+  const formButton = document.querySelector('.better-sharing-email-form button.better-sharing-button.better-sharing-send-button')
+  if (formButton) {
+    formButton.addEventListener('click', addressBookConnector.submitForm)
+  }
 }
 
 // allow the options to be assigned this way
