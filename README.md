@@ -47,13 +47,31 @@ Edit your Prefinery.com Referral Page. Click the HTML view so you can edit the c
 Next, you'll [connect Zapier with your CloudSponge account](https://www.cloudsponge.com/integrations/zapier/) so that it can trigger an action when someone submits the Contact Picker.
 
 
+### KickoffLabs
+
+Customize the user experience when they click on the `mailto` link with Better Sharing on your [KickoffLabs](https://kickofflabs.com/) page.
+
+Edit the "Tracking Codes" for your campaign and include the following code in the Footer Scripts section.
+Don't forget to replace the "YOUR CLOUDSPONGE KEY" with your CloudSponge key!
+
+```
+<script
+  src="https://unpkg.com/@cloudsponge/better-sharing.js"
+  data-key="YOUR CLOUDSPONGE KEY"
+  data-selector='[href^="mailto:"]'
+  data-view="modal"
+  data-send-via="mailto"
+  data-delay-init="true"
+  crossorigin="anonymous">
+</script>
+<script>var x=setInterval(function(){if(window._kol.component_register.ready&&window.betterSharing){betterSharing();clearTimeout(x);}},100)</script>
+```
+
+
 ### Conjured Referrals
 
 Our [Conjured Referrals](https://conjured.co/) integration supports this platform on Shopify. Check out the [Better Sharing for Conjured here](https://www.npmjs.com/package/@cloudsponge/better-sharing-shopify-conjured-referrals.js).
 
-### KickoffLabs
-
-[KOL's integration](https://kickofflabs.com/) can be found at the [Better Sharing for KickoffLabs project here](https://www.npmjs.com/package/@cloudsponge/better-sharing-kickoff-labs.js).
 
 ### HTML
 
