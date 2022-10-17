@@ -141,6 +141,11 @@ const betterSharing = (opts = {}) => {
     document.body.insertAdjacentHTML('beforeend', modalEmailFormTemplate(opts))
     // selected element launches the modal
     if (element) {
+      // remove the onclick attribute if it's defined
+      if (element.onclick) {
+        element.onclick = null
+        element.setAttribute('onclick', null)
+      }
       element.addEventListener('click', (e) => {
         e.preventDefault()
         e.stopPropagation()
