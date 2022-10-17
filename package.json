@@ -23,7 +23,7 @@
     "audit:fix": "npm install --package-lock-only; npm audit fix --force; rm yarn.lock; yarn import; rm package-lock.json; yarn install"
   },
   "dependencies": {
-    "@cloudsponge/address-book-connector.js": "^1.2.3",
+    "@cloudsponge/address-book-connector.js": "^1.2.6",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.9.0",
     "eslint-config-prettier": "^6.11.0",
