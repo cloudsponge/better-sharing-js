@@ -178,7 +178,9 @@ const betterSharing = (opts = {}) => {
 // allow the options to be assigned this way
 betterSharing.options = options
 
-// everything is set up, attempt to attach to the selector
-betterSharing()
+if (!options().delayInit) {
+  // everything is set up, attempt to attach to the selector
+  betterSharing()
+}
 
 export default betterSharing
